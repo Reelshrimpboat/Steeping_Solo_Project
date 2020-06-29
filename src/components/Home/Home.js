@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
 // this could also be written with destructuring parameters as:
-// const UserPage = ({ user }) => (
+// const Home = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
-const UserPage = (props) => (
+const Home = (props) => (
   <div>
     <h1 id="welcome">
-      Welcome, { props.user.username }!
+      Welcome, { props.user.username }, Pick a Tea, Any Tea!
     </h1>
-    <p>Your ID is: {props.user.id}</p>
-    <LogOutButton className="log-in" />
+    <input></input>
+    {props.teas &&
+        props.teas.map((tea)=>
+          <p key={tea.id}>Name: {tea.name}</p>)
+      }
   </div>
 );
 
@@ -20,7 +23,8 @@ const UserPage = (props) => (
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
+  teas: state.teas,
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(Home);
