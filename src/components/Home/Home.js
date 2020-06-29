@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import Search from '../Search/Search';
 
 // this could also be written with destructuring parameters as:
 // const Home = ({ user }) => (
@@ -10,11 +10,11 @@ const Home = (props) => (
     <h1 id="welcome">
       Welcome, { props.user.username }, Pick a Tea, Any Tea!
     </h1>
-    <input></input>
     {props.teas &&
         props.teas.map((tea)=>
           <p key={tea.id}>Name: {tea.name}</p>)
       }
+    <Search />
   </div>
 );
 
