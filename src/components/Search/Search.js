@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Suggestions from '../Suggestions/Suggestions'
+import Suggestions from '../SearchSuggestions/SearchSuggestions'
 
 class Search extends Component {
  state = {

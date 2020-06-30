@@ -18,6 +18,7 @@ import Home from '../Home/Home';
 import HomeLoggedIn from '../HomeLoggedIn/HomeLoggedIn';
 import SteepPage from '../SteepPage/SteepPage';
 import UsersTeas from '../UsersTeas/UsersTeas';
+import Browse from '../Browse/Browse'
 
 import './App.css';
 
@@ -67,6 +68,11 @@ class App extends Component {
               exact
               path="/yourTeas"
               component={UsersTeas}
+            />
+            <ProtectedRoute
+              exact
+              path="/browse"
+              component={Browse}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
