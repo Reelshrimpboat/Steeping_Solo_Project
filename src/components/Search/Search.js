@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import Suggestions from '../Suggestions/Suggestions'
+import Timer from '../Timer/Timer'
 
 class Search extends Component {
  state = {
    query: '',
-   results: []
+   results: [],
  }
 
  searchCheck = () => {
@@ -32,17 +34,20 @@ class Search extends Component {
 
  render() {
    return (
+    <section>
+        {JSON.stringify(this.props.selectedTea)}
      <form>
        <input
          placeholder="Search for..."
          ref={input => this.search = input}
          onChange={this.handleInputChange}
        />
-       <ul>{this.props.teas &&
-       this.state.results.map((tea)=> 
-       <li key={tea.id}>{tea.name}</li>
-       )}</ul>
+       <Suggestions results={this.state.results} />
      </form>
+     {this.props.selectedTea.min_time &&
+     <Timer selectedTea={this.props.selectedTea}/>
+    }
+     </section>
    )
  }
 }
@@ -50,6 +55,7 @@ class Search extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     teas: state.teas,
+    selectedTea: state.timer,
 });
 
 // this allows us to use <App /> in index.js
