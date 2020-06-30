@@ -13,7 +13,7 @@ const Nav = (props) => (
 
         {props.user.id ?
         <>
-          <Link className="nav-link" to="/home">
+          <Link className="nav-link" to="/homeloggedin">
             Timer
           </Link>
           <Link className="nav-link" to="/yourTeas">

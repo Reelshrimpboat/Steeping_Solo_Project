@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Search from '../Search/Search'
 
 
 class Home extends Component {
   componentDidMount() {
-    this.props.disptach({type: 'FETCH_USERS_TEAS'})
+    this.props.dispatch({type: 'FETCH_USERS_TEAS'})
   }
 
   steepClick = () => {
