@@ -5,6 +5,13 @@ import Search from '../Search/Search'
 
 class Home extends Component {
 
+  componentDidMount(){
+    this.props.dispatch({
+      type: 'SET_TIMED_TEA',
+      payload: {}
+    })
+  }
+
  steepClick = () => {
   this.props.history.push('/steep');
  }

@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import OwnedTea from '../TeaItemOwned/TeaItemOwned'
+import FavoriteTea from '../TeaItemFavorite/TeaItemFavorite'
 
-class SteepPage extends React.Component {
+class usersTeas extends React.Component {
  componentDidMount() {
     this.props.dispatch({type: 'FETCH_USERS_TEAS'})
  }
@@ -13,7 +15,10 @@ class SteepPage extends React.Component {
                 {this.props.usersTeas &&
                     this.props.usersTeas.map((tea) => {
                     if(tea.owned === true){
-                        return<li key={tea.id}>{tea.tea_name}</li>
+                        return <OwnedTea key={tea.id} usersTeas={tea}/>
+                    }
+                    else{
+                        return null;
                     }
                     })
                 }
@@ -23,7 +28,10 @@ class SteepPage extends React.Component {
                 {this.props.usersTeas &&
                     this.props.usersTeas.map((tea) => {
                     if(tea.favorited === true){
-                        return<li key={tea.id}>{tea.tea_name}</li>
+                        return <FavoriteTea key={tea.id} usersTeas={tea}/>
+                    }
+                    else{
+                        return null;
                     }
                     })
                 }
@@ -34,6 +42,9 @@ class SteepPage extends React.Component {
                     this.props.usersTeas.map((tea) => {
                     if(tea.review !== null){
                         return<li key={tea.id}>{tea.tea_name} {tea.review}</li>
+                    }
+                    else{
+                        return null;
                     }
                     })
                 }
@@ -49,4 +60,4 @@ const mapStateToProps = state => ({
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps) (SteepPage);
+export default connect(mapStateToProps) (usersTeas);
