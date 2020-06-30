@@ -8,8 +8,36 @@ class SteepPage extends React.Component {
     render() {
         return(
             <section>
-                <h2>You Will Eventually Be Able To Find Your Teas Here!</h2>
-                {JSON.stringify(this.props.usersTeas)}
+                <h2>Owned Teas</h2>
+                <ul>
+                {this.props.usersTeas &&
+                    this.props.usersTeas.map((tea) => {
+                    if(tea.owned === true){
+                        return<li key={tea.id}>{tea.tea_name}</li>
+                    }
+                    })
+                }
+                </ul>
+                <h2>Favorite Teas</h2>
+                <ul>
+                {this.props.usersTeas &&
+                    this.props.usersTeas.map((tea) => {
+                    if(tea.favorited === true){
+                        return<li key={tea.id}>{tea.tea_name}</li>
+                    }
+                    })
+                }
+                </ul>
+                <h2>Tea Reviews</h2>
+                <ul>
+                {this.props.usersTeas &&
+                    this.props.usersTeas.map((tea) => {
+                    if(tea.review !== null){
+                        return<li key={tea.id}>{tea.tea_name} {tea.review}</li>
+                    }
+                    })
+                }
+                </ul>
             </section>
         );
     }
