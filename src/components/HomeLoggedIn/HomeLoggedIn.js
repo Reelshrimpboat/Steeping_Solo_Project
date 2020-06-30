@@ -1,24 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Search from '../Search/Search'
 
 
 class Home extends Component {
-
-  componentDidMount(){
-    this.props.dispatch({
-      type: 'SET_TIMED_TEA',
-      payload: {}
-    })
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_USERS_TEAS'})
   }
 
- steepClick = () => {
-  this.props.history.push('/steep');
- }
+  steepClick = () => {
+    this.props.history.push('/steep');
+  }
 
- render() {
+  render() {
    return (
     <section>
+      <h2>You're Logged In Buddy!</h2>
       <h1>Pick a tea, any tea!</h1>
         {this.props.selectedTea.min_time &&
         <div>
@@ -29,7 +26,7 @@ class Home extends Component {
         </div>
         }
       <Search />
-     </section>
+    </section>
    )
  }
 }

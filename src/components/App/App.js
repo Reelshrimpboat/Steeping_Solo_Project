@@ -15,7 +15,9 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import Home from '../Home/Home';
+import HomeLoggedIn from '../HomeLoggedIn/HomeLoggedIn';
 import SteepPage from '../SteepPage/SteepPage';
+import UsersTeas from '../UsersTeas/UsersTeas';
 
 import './App.css';
 
@@ -37,6 +39,11 @@ class App extends Component {
             This is a route anyone can see, no login necessary */}
             <Route
               exact
+              path="/home"
+              component={Home}
+            />
+            <Route
+              exact
               path="/about"
               component={AboutPage}
             />
@@ -51,15 +58,15 @@ class App extends Component {
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
             <ProtectedRoute
               exact
-              path="/home"
-              component={Home}
+              path="/homeloggedin"
+              component={HomeLoggedIn}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             <ProtectedRoute
               exact
-              path="/info"
-              component={SteepPage}
+              path="/yourTeas"
+              component={UsersTeas}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
