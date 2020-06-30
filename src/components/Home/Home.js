@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Search from '../Search/Search';
+import Search from '../Search/Search'
 
-// this could also be written with destructuring parameters as:
-// const Home = ({ user }) => (
-// and then instead of `props.user.username` you could use `user.username`
-const Home = (props) => (
-  <div>
-    <h1 id="welcome">
-      Welcome, { props.user.username }, Pick a Tea, Any Tea!
-    </h1>
-    {props.teas &&
-        props.teas.map((tea)=>
-          <p key={tea.id}>Name: {tea.name}</p>)
-      }
-    <Search />
-  </div>
-);
 
-// Instead of taking everything from state, we just want the user info.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({user}) => ({ user });
+class Home extends Component {
+
+ steepClick = () => {
+    this.props.history.push('/steep');
+ }
+
+ render() {
+   return (
+    <section>
+      <h1>Pick a tea, any tea!</h1>
+        {this.props.selectedTea.min_time &&
+        <div>
+            <h2>{this.props.selectedTea.name}</h2>
+            <h3>Steeping Time: {this.props.selectedTea.min_time/60} - {this.props.selectedTea.max_time/60}</h3>
+            <h3>Steeping Temp: {this.props.selectedTea.temp_F}</h3>
+            <button onClick={this.steepClick}>Steep!</button>
+        </div>
+        }
+      <Search />
+     </section>
+   )
+ }
+}
+
 const mapStateToProps = state => ({
-  user: state.user,
-  teas: state.teas,
+    user: state.user,
+    teas: state.teas,
+    selectedTea: state.timer,
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps) (Home);

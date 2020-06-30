@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Suggestions from '../Suggestions/Suggestions'
-import Timer from '../Timer/Timer'
 
 class Search extends Component {
  state = {
@@ -10,13 +9,15 @@ class Search extends Component {
  }
 
  searchCheck = () => {
-    // console.log('query:', this.state.query, this.props.teas[0].name)
-    // let name = this.props.teas[0].name
-    // let includes = name.includes(this.state.query)
-    // console.log('includes:', includes);
-    let query = this.state.query;
-    
-    let newReturn = this.props.teas.filter((tea) => tea.name.includes(query) === true)
+
+    let newReturn = []
+
+    if(this.state.query !== ''){
+    newReturn = this.props.teas.filter((tea) => tea.name.includes(this.state.query) === true)
+    }
+    else{
+    newReturn = []
+    }
     this.setState({
         results: newReturn,
     }, () => {
@@ -34,20 +35,16 @@ class Search extends Component {
 
  render() {
    return (
-    <section>
-        {JSON.stringify(this.props.selectedTea)}
      <form>
        <input
          placeholder="Search for..."
          ref={input => this.search = input}
          onChange={this.handleInputChange}
        />
-       <Suggestions results={this.state.results} />
+       {this.state.results.map((tea) => 
+       <Suggestions tea={tea} key={tea.id}/>
+       )}
      </form>
-     {this.props.selectedTea.min_time &&
-     <Timer selectedTea={this.props.selectedTea}/>
-    }
-     </section>
    )
  }
 }

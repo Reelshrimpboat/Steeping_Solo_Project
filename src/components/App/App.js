@@ -15,7 +15,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import Home from '../Home/Home';
-import Timer from '../Timer/Timer';
+import SteepPage from '../SteepPage/SteepPage';
 
 import './App.css';
 
@@ -40,6 +40,11 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
+            <Route
+              exact
+              path="/steep"
+              component={SteepPage}
+            />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the Home if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -54,7 +59,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/info"
-              component={Timer}
+              component={SteepPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
