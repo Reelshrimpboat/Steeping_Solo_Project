@@ -11,7 +11,13 @@ class TeaItemFavorite extends React.Component {
     }
 
     removeTea = () => {
-        //this will be a PUT request to change favorite boolean to false
+        this.props.dispatch({
+            type: 'CHANGE_FAVORITE_STATUS',
+            payload: {
+                id: this.props.tea.tea_id,
+                status: false
+            }
+        })
     }
 
     ownTea = () => {

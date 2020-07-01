@@ -118,6 +118,28 @@ router.post('/owned/:id', (req, res) => {
         else{
             res.sendStatus(403);
         }
-}); //END POST for reviews
+}); //END POST for owned
+
+//POST for favorite
+router.post('/favorite/:id', (req, res) => {
+    const queryText = `INSERT INTO "user_teas"
+                ("user_id", "tea_id", "favorited")
+                SELECT $1, $2, $3
+                ON CONFLICT ON CONSTRAINT user_teas_uq
+                DO UPDATE SET "favorited"=$4;`
+
+    console.log('Favorite post request, user id:', req.user.id, 'tea_id:', req.params.id, 'favorite:', req.body.status)
+    if (req.isAuthenticated(queryText)) {
+        pool.query(queryText, [req.user.id, req.params.id, req.body.status, req.body.status])
+            .then((results) => {
+                res.send(results);
+            }).catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+}); //END POST for favorite
 
 module.exports = router;

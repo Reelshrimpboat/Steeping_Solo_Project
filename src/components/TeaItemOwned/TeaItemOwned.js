@@ -21,7 +21,13 @@ class TeaItemOwned extends React.Component {
     }
 
     favoriteTea = () => {
-        //this will be a PUT request to change favorite boolean to true
+        this.props.dispatch({
+            type: 'CHANGE_FAVORITE_STATUS',
+            payload: {
+                id: this.props.tea.tea_id,
+                status: true
+            }
+        })
     }
 
     steepTea = () => {
@@ -38,7 +44,7 @@ class TeaItemOwned extends React.Component {
 
             <button onClick={this.removeTea}>Remove From Owned</button>
         
-            {tea.favorited &&
+            {!tea.favorited &&
             <button onClick={this.favoriteTea}>Favorite This Tea</button>
             }
             <button onClick={this.steepTea}>Steep This Tea</button>

@@ -38,8 +38,30 @@ class Browse extends Component {
             owned: false
         })
     }
-    favoriteTea = () => {
-        //will be put/post
+
+    addFavoritedTea = () => {
+            this.props.dispatch({
+                type: 'CHANGE_FAVORITE_STATUS',
+                payload: {
+                    id: this.props.tea.id,
+                    status: true
+                }
+            })
+        this.setState({
+            favorited: true
+        })
+    }
+    removeFavoritedTea = () => {
+            this.props.dispatch({
+                type: 'CHANGE_FAVORITE_STATUS',
+                payload: {
+                    id: this.props.tea.id,
+                    status: false
+                }
+            })
+        this.setState({
+            favorited: false
+        })
     }
 
     //gets reviews
@@ -73,10 +95,26 @@ class Browse extends Component {
         })
         return false 
     }
+    checkIfFavorited = () => {
+        for (let index = 0; index < this.props.usersTeas.length; index++) {
+            const element = this.props.usersTeas[index];
+            if(this.props.tea.id == element.id && element.favorited === true){
+                this.setState({
+                    favorited: true
+                })
+                return true
+            }
+        }
+        this.setState({
+            favorited: false
+        })
+        return false 
+    }
 
     componentDidMount(){
         this.getReviews();
         this.checkIfOwned();
+        this.checkIfFavorited();
     }
 
 
@@ -98,7 +136,11 @@ class Browse extends Component {
             :
             <button onClick={this.addOwnedTea}>Add to Owned</button>
             }
-            <button onClick={this.favoriteTea}>Add to Favorites</button>
+            {this.state.favorited ?
+            <button onClick={this.removeFavoritedTea}>Remove from Favorites</button>
+            :
+            <button onClick={this.addFavoritedTea}>Add to Favorites</button>
+            }
             <h3>Reviews</h3>
             {this.props.reviews &&
              this.props.reviews.map((review) =>
