@@ -6,6 +6,7 @@ import teas from './teasReducer';
 import usersTeas from './usersTeasReducer';
 import timer from './timerReducer';
 import ratings from './ratingReducer'
+import reviews from './reviewReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   timer, // contains the tea to be timed
   usersTeas, // contains teas owned and rated by user
   ratings, // contains all the ratings with associated tea_id
+  reviews, // contains the reviews for selected tea
 });
 
 export default rootReducer;

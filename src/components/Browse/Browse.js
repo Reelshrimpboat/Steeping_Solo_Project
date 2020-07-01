@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Search from '../Search/Search'
 import BrowseTea from '../TeaItemBrowse/TeaItemBrowse'
+import TeaPage from '../TeaPage/TeaPage'
 
 
 class Browse extends Component {
@@ -14,6 +15,9 @@ class Browse extends Component {
           this.props.teas.map((tea) => 
               <BrowseTea key={tea.id} tea={tea} rating={this.props.ratings[tea.id-1]}/>
           )
+        }
+        {this.props.teas[0] &&
+        <TeaPage tea={this.props.teas[0]} /> 
         }
      </section>
    )
