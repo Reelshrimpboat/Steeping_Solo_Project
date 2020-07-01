@@ -11,11 +11,11 @@ const Nav = (props) => (
     </Link>
     <div className="nav-right">
 
-        {props.user.id ?
-        <>
-          <Link className="nav-link" to="/homeloggedin">
+          <Link className="nav-link" to="/home">
             Timer
           </Link>
+        {props.user.id ?
+        <>
           <Link className="nav-link" to="/yourTeas">
             Your Teas
           </Link>
@@ -26,9 +26,6 @@ const Nav = (props) => (
         </>
         : 
         <>
-          <Link className="nav-link" to="/home">
-          Timer
-          </Link>
           <Link className="nav-link" to="/yourTeas">
             Log In/ Register
           </Link>
