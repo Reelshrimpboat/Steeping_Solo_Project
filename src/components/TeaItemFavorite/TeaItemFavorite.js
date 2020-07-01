@@ -15,22 +15,28 @@ class TeaItemFavorite extends React.Component {
     }
 
     ownTea = () => {
-        //this will be a PUT request to change owned boolean to true
+       this.props.dispatch({
+           type: 'CHANGE_OWNED_STATUS',
+           payload: {
+               id: this.props.tea.tea_id,
+               status: true
+           }
+       })
     }
 
     steepTea = () => {
         this.props.dispatch({
             type: 'SET_TIMED_TEA',
-            payload: this.props.usersTeas
+            payload: this.props.tea
         })
     }
 
     render() {
-        let tea = this.props.usersTeas
+        let tea = this.props.tea
         return(
             <li>{tea.tea_name}
             <button onClick={this.removeTea}>Remove From Favorited</button>
-            {tea.owned &&
+            {!tea.owned &&
             <button onClick={this.ownTea}>Add to Owned</button>
             }
             <button onClick={this.steepTea}>Steep This Tea</button>

@@ -15,7 +15,7 @@ class usersTeas extends React.Component {
                 {this.props.usersTeas &&
                     this.props.usersTeas.map((tea) => {
                     if(tea.owned === true){
-                        return <OwnedTea key={tea.id} usersTeas={tea}/>
+                        return <OwnedTea key={tea.id} tea={tea}/>
                     }
                     else{
                         return null;
@@ -28,7 +28,7 @@ class usersTeas extends React.Component {
                 {this.props.usersTeas &&
                     this.props.usersTeas.map((tea) => {
                     if(tea.favorited === true){
-                        return <FavoriteTea key={tea.id} usersTeas={tea}/>
+                        return <FavoriteTea key={tea.id} tea={tea}/>
                     }
                     else{
                         return null;

@@ -17,7 +17,7 @@ class Browse extends Component {
           )
         }
         {this.props.teas[0] &&
-        <TeaPage tea={this.props.teas[0]} /> 
+        <TeaPage tea={this.props.teas[2]} /> 
         }
      </section>
    )

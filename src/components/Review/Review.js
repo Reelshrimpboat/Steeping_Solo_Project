@@ -5,9 +5,9 @@ class Review extends React.Component {
     render() {
         return(
             <div>
-                <p>{this.props.rating}</p>
-                <p>{this.props.review}</p>
-                <h4>{this.props.username}</h4>
+                <p>{this.props.review.rating}</p>
+                <p>{this.props.review.review}</p>
+                <h4>{this.props.review.username}</h4>
             </div>
         );
     }

@@ -58,7 +58,7 @@ router.get('/ratings/', (req, res) => {
 
 //GET Review Route
 router.get('/review/:id', (req, res) => {
-    const queryText = `SELECT "tea_id", "review", "username"  FROM "user_teas"
+    const queryText = `SELECT "user_teas"."id", "tea_id", "rating", "review", "username" FROM "user_teas"
                 JOIN "user" ON "user_teas"."user_id" = "user"."id"
                 WHERE "tea_id" = $1 AND "review" IS NOT NULL`;
     console.log('get request tea_id:', req.params.id)
@@ -81,7 +81,7 @@ router.post('/review/:id', (req, res) => {
                 ON CONFLICT ON CONSTRAINT user_teas_uq
                 DO UPDATE SET "review"='$3';`
                 
-    console.log('post request, user id:', req.user.id, 'tea_id:', req.body.id, 'review:', req.body.review)
+    console.log('post request, user id:', req.user.id, 'tea_id:', req.params.id, 'review:', req.body.review)
     res.sendStatus(200);
 // if (req.isAuthenticated(queryText)) {
 //         pool.query(queryText, [req.user.id, req.body.id, req.body.review])
@@ -95,6 +95,29 @@ router.post('/review/:id', (req, res) => {
 //     else{
 //         res.sendStatus(403);
 //     }
-});
+});//END POST for reviews
+
+//POST for owned
+router.post('/owned/:id', (req, res) => {
+    const queryText = `INSERT INTO "user_teas"
+                ("user_id", "tea_id", "owned")
+                SELECT $1, $2, $3
+                ON CONFLICT ON CONSTRAINT user_teas_uq
+                DO UPDATE SET "owned"=$4;`
+
+    console.log('Owned post request, user id:', req.user.id, 'tea_id:', req.params.id, 'owned:', req.body.status)
+    if (req.isAuthenticated(queryText)) {
+            pool.query(queryText, [req.user.id, req.params.id, req.body.status, req.body.status])
+            .then((results) => {
+                res.send(results);
+            }).catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            })
+        }
+        else{
+            res.sendStatus(403);
+        }
+}); //END POST for reviews
 
 module.exports = router;

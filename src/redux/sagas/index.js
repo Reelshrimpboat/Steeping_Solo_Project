@@ -6,6 +6,7 @@ import teasSaga from './teasSaga';
 import usersTeasSaga from './usersTeasSaga';
 import ratingSaga from './ratingSaga';
 import fetchReviewSaga from './fetchReviewSaga';
+import postOwnedSaga from './postOwnedSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     usersTeasSaga(),
     ratingSaga(),
     fetchReviewSaga(),
+    postOwnedSaga(),
   ]);
 }
