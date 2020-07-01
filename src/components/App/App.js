@@ -26,6 +26,7 @@ class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
     this.props.dispatch({type: 'FETCH_TEAS'})
+    this.props.dispatch({type: 'FETCH_RATINGS'})
   }
 
   render() {

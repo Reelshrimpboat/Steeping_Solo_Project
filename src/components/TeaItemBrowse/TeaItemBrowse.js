@@ -7,13 +7,15 @@ class TeaItemFavorite extends React.Component {
         let tea = this.props.tea
         return(
             <div>
-                <h2>{tea.tea_name}</h2>
+                <h2>{tea.name}</h2>
                 <p>{tea.description}</p>
-            
+                {this.props.rating &&
+                <p>Rating: {this.props.rating.rating}</p>
+                }
             </div>
         );
     }
 }
 
 // this allows us to use <App /> in index.js
-export default connect() (TeaItemFavorite);
+export default connect()(TeaItemFavorite);

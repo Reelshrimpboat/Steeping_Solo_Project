@@ -12,7 +12,7 @@ class Browse extends Component {
       <Search />
         {this.props.teas &&
           this.props.teas.map((tea) => 
-              <BrowseTea key={tea.id} tea={tea}/>
+              <BrowseTea key={tea.id} tea={tea} rating={this.props.ratings[tea.id-1]}/>
           )
         }
      </section>
@@ -20,9 +20,11 @@ class Browse extends Component {
  }
 }
 
+
 const mapStateToProps = state => ({
-    teas: state.teas,
-    usersTeas: state.usersTeas,
+  teas: state.teas,
+  usersTeas: state.usersTeas,
+  ratings: state.ratings,
 });
 
 // this allows us to use <App /> in index.js

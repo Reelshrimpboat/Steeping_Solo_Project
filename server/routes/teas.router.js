@@ -27,17 +27,34 @@ router.get('/users/', rejectUnauthenticated, (req, res) => {
                         FULL JOIN "teas" ON "user_teas"."tea_id" = "teas"."id"
                         WHERE "user"."id" = $1
                         ORDER BY "user_teas"."id" ;`;
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated(sqlText)) {
         pool.query(sqlText, [req.user.id])
             .then(results => res.send(results.rows))
-            .catch(error => {
-                console.log(`Error making GET for teas, with user_id: ${req.user.id}`, error);
+            .catch((error) => {
+                console.log(`Error making GET for user_teas, with user_id: ${req.user.id}`, error);
                 res.sendStatus(500);
             });
     } else {
         res.sendStatus(403);
     }
 });
+
+//GET Rating Route
+router.get('/ratings/', (req, res) => {
+    const sqlText = `SELECT "user_teas"."tea_id", ROUND(AVG("rating"), 2) AS "rating" FROM "teas"
+                        FULL JOIN "user_teas" ON "teas"."id" = "user_teas"."tea_id"
+                        GROUP BY "user_teas"."tea_id"
+                        ORDER BY "user_teas"."tea_id";`;
+    pool.query(sqlText)
+        .then((result) => {
+            console.log(`GET Ratings database request successful`, result);
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error making GET Ratings for teas:`, error);
+            res.sendStatus(500);
+        })
+}); //END GET Rating Route
 
 /**
  * POST route template
