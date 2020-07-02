@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import RatingButton from '../../InputButtons/RatingButton/RatingButton'
 
 class TeaItemFavorite extends React.Component {
 
@@ -46,6 +47,7 @@ class TeaItemFavorite extends React.Component {
             <button onClick={this.ownTea}>Add to Owned</button>
             }
             <button onClick={this.steepTea}>Steep This Tea</button>
+            <RatingButton tea_id={this.props.tea.tea_id}/>
             </li>
         );
     }
