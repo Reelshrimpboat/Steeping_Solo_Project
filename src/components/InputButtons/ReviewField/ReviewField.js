@@ -32,22 +32,17 @@ class ReviewField extends React.Component {
     }
 
     addButton = (event) => {
+
         if(this.state.review !== '' & this.state.rating !== 0){
             console.log('to dispatch, review:', this.state.review, 'rating:', this.state.rating)
-            // this.props.dispatch({
-            //     type: 'CHANGE_REVIEW',
-            //     payload: {
-            //         id: this.props.tea_id,
-            //         review: this.state.review
-            //     }
-            // })
-            // this.props.dispatch({
-            //     type: 'CHANGE_RATING_STATUS',
-            //     payload: {
-            //         id: this.props.tea_id,
-            //         status: this.state.rating
-            //     }
-            // })
+            this.props.dispatch({
+                type: 'CHANGE_REVIEW',
+                payload: {
+                    id: this.props.tea_id,
+                    review: this.state.review,
+                    rating: this.state.rating
+                }
+            })
         } else {
             alert('Please input to both fields')
         }
@@ -61,9 +56,24 @@ class ReviewField extends React.Component {
                     <textarea value={this.state.review} onChange={this.handleReviewChange}></textarea>
                 </form>
                 </label>
+                <label htmlFor="5-Star Rating">
+                <form id="starForm">
+                {this.state.starNumber.map((numb) => 
+                    <input
+                    key={numb} 
+                    type="radio"
+                    name="star"
+                    value={numb} 
+                    onChange={this.changeRating} 
+                    // defaultChecked={numb <= this.props.rating}
+                    />
+                )}
+                </form>
+                </label>
                 <label htmlFor="SaveButton">
                 <button onClick={this.addButton}>Add Review</button>
                 </label>
+
             </>
         );
     }

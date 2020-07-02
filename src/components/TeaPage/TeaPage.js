@@ -11,7 +11,8 @@ class Browse extends Component {
         reviews: [],
         owned: false,
         favorited: false,
-        reviewToggled: false
+        reviewed: false,
+        reviewToggled: false,
     }
 
     addOwnedTea = () => {
@@ -110,11 +111,27 @@ class Browse extends Component {
         })
         return false 
     }
+    checkIfReviewed = () => {
+        for (let index = 0; index < this.props.usersTeas.length; index++) {
+            const element = this.props.usersTeas[index];
+            if (this.props.tea.id == element.id && element.review !== null ) {
+                this.setState({
+                    reviewed: true
+                })
+                return true
+            }
+        }
+        this.setState({
+            reviewed: false
+        })
+        return false
+    }
 
     componentDidMount(){
         this.getReviews();
         this.checkIfOwned();
         this.checkIfFavorited();
+        this.checkIfReviewed();
     }
     reviewToggleOn = (event) => {
         if (this.state.reviewToggled === false) {
@@ -147,7 +164,7 @@ class Browse extends Component {
             {this.props.rating &&
             <p>Rating: {this.props.rating.rating}</p>
             }
-            <button onClick={this.rateTea}>Rate Tea</button>
+            <RatingButton tea_id={this.props.tea.id} rating={this.props.tea.rating}/>
             {this.state.owned ?
             <button onClick={this.removeOwnedTea}>Remove from Owned</button>
             :
@@ -180,13 +197,17 @@ class Browse extends Component {
                 }
              })
             }
-            {this.state.reviewToggled === true ?
+            {this.state.reviewed === false &&
+                <>
+                {this.state.reviewToggled === true ?
                 <>
                     <ReviewField review={tea.review} rating={tea.rating} />
                     <button onClick={this.reviewToggleOff}>Done Editing</button>
                 </>
                 :
                 <button onClick={this.reviewToggleOn} value={tea.tea_id}>Add Your Own!</button>
+                }
+                </>
             }
         </div>
     );

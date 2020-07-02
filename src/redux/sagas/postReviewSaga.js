@@ -7,8 +7,10 @@ function* postReviewSaga () {
 }
 
 function* postReview (action) {
-    yield axios.post (`/api/teas/review/${action.payload.id}`, {review: action.payload.review})
-    yield put({ type: 'FETCH_REVIEWS' });
+    console.log(action.payload.id)
+    yield axios.post (`/api/teas/review/${action.payload.id}`, {review: action.payload.review, rating: action.payload.rating})
+    yield put({ type: 'FETCH_REVIEWS', payload: action.payload.id });
+    yield put({ type: 'FETCH_USERS_TEAS' });
 }
 
 export default postReviewSaga;

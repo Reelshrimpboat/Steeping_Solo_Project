@@ -76,25 +76,24 @@ router.get('/review/:id', (req, res) => {
 //POST for reviews
 router.post('/review/:id', (req, res) => {
     const queryText = `INSERT INTO "user_teas"
-                ("user_id", "tea_id", "review")
-                SELECT $1, $2,'$3'
+                ("user_id", "tea_id", "review", "rating")
+                SELECT $1, $2,$3, $4
                 ON CONFLICT ON CONSTRAINT user_teas_uq
-                DO UPDATE SET "review"='$3';`
+                DO UPDATE SET "review"=$5, "rating"=$6;`
                 
     console.log('post request, user id:', req.user.id, 'tea_id:', req.params.id, 'review:', req.body.review)
-    res.sendStatus(200);
-// if (req.isAuthenticated(queryText)) {
-//         pool.query(queryText, [req.user.id, req.body.id, req.body.review])
-//         .then((results) => {
-//             res.send(results);
-//         }).catch((error) => {
-//             console.log(error);
-//             res.sendStatus(500);
-//         })
-//     }
-//     else{
-//         res.sendStatus(403);
-//     }
+if (req.isAuthenticated(queryText)) {
+        pool.query(queryText, [req.user.id, req.params.id, req.body.review, req.body.rating, req.body.review, req.body.rating])
+        .then((results) => {
+            res.send(results);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    }
+    else{
+        res.sendStatus(403);
+    }
 });//END POST for reviews
 
 //POST for owned

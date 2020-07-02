@@ -73,7 +73,7 @@ class usersTeas extends React.Component {
                         <>
                         {this.state.reviewTeaId == tea.tea_id &&
                         <>
-                        <ReviewField review={tea.review} rating={tea.rating} />
+                        <ReviewField review={tea.review} rating={tea.rating} tea_id={tea.tea_id}/>
                         <button onClick={this.reviewToggleOff}>Done Editing</button>
                         </>
                         }
