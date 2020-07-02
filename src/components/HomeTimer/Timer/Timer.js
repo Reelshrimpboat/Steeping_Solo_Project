@@ -75,6 +75,10 @@ class Timer extends React.Component {
     // Check if we're at zero.
     if (seconds == 0) { 
       clearInterval(this.timer);
+      this.setState({
+        clockStopped: true,
+        countingDown: false
+      })
     }
   }
 
@@ -89,7 +93,8 @@ class Timer extends React.Component {
   resumeTimer = () => {
     this.startTimer();
     this.setState({
-      clockStopped: false
+      clockStopped: false,
+      countingDown: true
     })
   }
 
@@ -97,13 +102,13 @@ class Timer extends React.Component {
     return(
       <div>
         m: {this.state.time.m} s: {this.state.time.s}
-        {!this.state.countingDown &&
+        {!this.state.countingDown && !this.state.clockStopped &&
           <button onClick={this.startTimer}>Start</button>
         }
         {this.state.countingDown && !this.state.clockStopped &&
         <button onClick={this.stopClock}>Stop</button>
         }
-        {this.state.clockStopped &&
+        {this.state.countingDown && this.state.clockStopped &&
         <button onClick={this.resumeTimer}>Resume</button>
         }
         {this.state.clockStopped &&

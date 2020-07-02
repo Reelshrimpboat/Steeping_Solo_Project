@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-class RegisterPage extends Component {
+class LoginPage extends Component {
   state = {
     username: '',
     password: '',
-    emailAddress: '',
   };
 
-  registerUser = (event) => {
+  login = (event) => {
     event.preventDefault();
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
-        type: 'REGISTER',
+        type: 'LOGIN',
         payload: {
           username: this.state.username,
           password: this.state.password,
-          emailAddress: this.state.emailAddress
         },
       });
     } else {
-      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-  } // end registerUser
+  } // end login
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -34,16 +32,16 @@ class RegisterPage extends Component {
   render() {
     return (
       <div>
-        {this.props.errors.registrationMessage && (
+        {this.props.errors.loginMessage && (
           <h2
             className="alert"
             role="alert"
           >
-            {this.props.errors.registrationMessage}
+            {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+        <form onSubmit={this.login} className="loginForm">
+          <h1>Login</h1>
           <div>
             <label htmlFor="username">
               Username:
@@ -67,22 +65,11 @@ class RegisterPage extends Component {
             </label>
           </div>
           <div>
-            <label htmlFor="email address">
-              Email:
-              <input
-                type="emailAddress"
-                name="emailAddress"
-                value={this.state.emailAddress}
-                onChange={this.handleInputChangeFor('emailAddress')}
-              />
-            </label>
-          </div>
-          <div>
             <input
-              className="register"
+              className="log-in"
               type="submit"
               name="submit"
-              value="Register"
+              value="Log In"
             />
           </div>
         </form>
@@ -90,9 +77,9 @@ class RegisterPage extends Component {
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
+            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
-            Login
+            Register
           </button>
         </center>
       </div>
@@ -107,5 +94,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(RegisterPage);
-
+export default connect(mapStateToProps)(LoginPage);

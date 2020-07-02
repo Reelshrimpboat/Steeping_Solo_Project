@@ -4,6 +4,12 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import teasSaga from './teasSaga';
 import usersTeasSaga from './usersTeasSaga';
+import ratingSaga from './ratingSaga';
+import fetchReviewSaga from './fetchReviewSaga';
+import postOwnedSaga from './postOwnedSaga';
+import postFavoriteSaga from './postFavoriteSaga';
+import postRatingSaga from './postRatingSaga';
+import postReviewSaga from './postReviewSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -19,5 +25,11 @@ export default function* rootSaga() {
     userSaga(),
     teasSaga(),
     usersTeasSaga(),
+    ratingSaga(),
+    fetchReviewSaga(),
+    postOwnedSaga(),
+    postFavoriteSaga(),
+    postRatingSaga(),
+    postReviewSaga(),
   ]);
 }
