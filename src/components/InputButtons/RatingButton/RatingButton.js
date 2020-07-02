@@ -5,7 +5,7 @@ import './RatingButton.css'
 class RatingButton extends React.Component {
 
     state = {
-        rating: 3
+        starNumber: [1,2,3,4,5]
     }
 
     changeRating = (event) => {
@@ -21,21 +21,11 @@ class RatingButton extends React.Component {
     render() {
         return(
             <form id="starForm" onChange={this.changeRating}>
-                <label for="star-1">
-                <input className="star star-1" value="1" type="radio" name="star"/>
+                {this.state.starNumber.map((numb) => 
+                <label key={numb}>
+                <input value={numb} type="radio" name="star"/>
                 </label>
-                <label for="star-2">
-                <input className="star star-2" value="2" type="radio" name="star"/>
-                </label>
-                <label for="star-3">
-                <input className="star star-3" value="3" type="radio" name="star"/>
-                </label>
-                <label for="star-4">
-                <input className="star star-4" value="4" type="radio" name="star"/>
-                </label>
-                <label for="star-5">
-                <input className="star star-5" value="5" type="radio" name="star"/>
-                </label>
+                )}
             </form>
         );
     }
