@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Review from '../ReviewItem/ReviewItem'
+import ReviewField from '../InputButtons/ReviewField/ReviewField'
+import RatingButton from '../InputButtons/RatingButton/RatingButton'
 
 
 class Browse extends Component {
@@ -9,11 +11,9 @@ class Browse extends Component {
         reviews: [],
         owned: false,
         favorited: false,
+        reviewToggled: false
     }
 
-    rateTea = () => {
-        //will be put/post
-    }
     addOwnedTea = () => {
             this.props.dispatch({
                 type: 'CHANGE_OWNED_STATUS',
@@ -116,6 +116,24 @@ class Browse extends Component {
         this.checkIfOwned();
         this.checkIfFavorited();
     }
+    reviewToggleOn = (event) => {
+        if (this.state.reviewToggled === false) {
+            this.setState({
+                reviewToggled: true,
+                reviewTeaId: event.target.value
+            })
+        } else {
+            alert('Close your review edit before editing another')
+        }
+    }
+
+    reviewToggleOff = () => {
+        console.log('clicked toggle off')
+        this.setState({
+            reviewToggled: false,
+            reviewTeaId: 0
+        })
+    }
 
 
  render() {
@@ -142,9 +160,33 @@ class Browse extends Component {
             }
             <h3>Reviews</h3>
             {this.props.reviews &&
-             this.props.reviews.map((review) =>
-             <Review key={review.id} review={review}/>
-             )
+             this.props.reviews.map((review) => {
+                if(review.user_id === this.props.user.id){
+                    return <div key={review.id} className="usersReview">
+                        {this.state.reviewToggled === true ?
+                            <>
+                                <ReviewField review={review.review} rating={review.rating} />
+                                <button onClick={this.reviewToggleOff}>Done Editing</button>
+                            </>
+                        :
+                            <>
+                                <Review key={review.id} review={review}/>
+                                <button onClick={this.reviewToggleOn} value={tea.tea_id}>Edit Your Review</button>
+                            </>
+                        }
+                    </div>
+                } else {
+                    return <Review key={review.id} review={review}/>
+                }
+             })
+            }
+            {this.state.reviewToggled === true ?
+                <>
+                    <ReviewField review={tea.review} rating={tea.rating} />
+                    <button onClick={this.reviewToggleOff}>Done Editing</button>
+                </>
+                :
+                <button onClick={this.reviewToggleOn} value={tea.tea_id}>Add Your Own!</button>
             }
         </div>
     );
@@ -153,6 +195,7 @@ class Browse extends Component {
 
 
 const mapStateToProps = state => ({
+    user: state.user,
     reviews: state.reviews,
     usersTeas: state.usersTeas,
 });

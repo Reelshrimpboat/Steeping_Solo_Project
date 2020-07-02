@@ -58,7 +58,7 @@ router.get('/ratings/', (req, res) => {
 
 //GET Review Route
 router.get('/review/:id', (req, res) => {
-    const queryText = `SELECT "user_teas"."id", "tea_id", "rating", "review", "username" FROM "user_teas"
+    const queryText = `SELECT "user_teas"."id", "tea_id", "rating", "review", "username", "user_id" FROM "user_teas"
                 JOIN "user" ON "user_teas"."user_id" = "user"."id"
                 WHERE "tea_id" = $1 AND "review" IS NOT NULL`;
     console.log('get request tea_id:', req.params.id)
