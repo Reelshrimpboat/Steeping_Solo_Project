@@ -3,13 +3,6 @@ import { connect } from 'react-redux';
 
 class TeaItemOwned extends React.Component {
 
-    componentDidMount(){
-        this.props.dispatch({
-        type: 'SET_TIMED_TEA',
-        payload: {}
-        })
-    }
-
     removeTea = () => {
         this.props.dispatch({
             type: 'CHANGE_OWNED_STATUS',

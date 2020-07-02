@@ -4,13 +4,6 @@ import RatingButton from '../../InputButtons/RatingButton/RatingButton'
 
 class TeaItemFavorite extends React.Component {
 
-    componentDidMount(){
-        this.props.dispatch({
-        type: 'SET_TIMED_TEA',
-        payload: {}
-        })
-    }
-
     removeTea = () => {
         this.props.dispatch({
             type: 'CHANGE_FAVORITE_STATUS',
@@ -47,7 +40,7 @@ class TeaItemFavorite extends React.Component {
             <button onClick={this.ownTea}>Add to Owned</button>
             }
             <button onClick={this.steepTea}>Steep This Tea</button>
-            <RatingButton tea_id={this.props.tea.tea_id}/>
+            <RatingButton tea_id={this.props.tea.tea_id} rating={this.props.tea.rating}/>
             </li>
         );
     }

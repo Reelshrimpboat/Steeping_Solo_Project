@@ -20,13 +20,20 @@ class RatingButton extends React.Component {
 
     render() {
         return(
-            <form id="starForm" onChange={this.changeRating}>
+            <label htmlFor="5-Star Rating">
+            <form id="starForm">
                 {this.state.starNumber.map((numb) => 
-                <label key={numb}>
-                <input value={numb} type="radio" name="star"/>
-                </label>
+                <input
+                key={numb} 
+                type="radio"
+                name="star"
+                value={numb} 
+                onChange={this.changeRating} 
+                // defaultChecked={numb <= this.props.rating}
+                />
                 )}
             </form>
+            </label>
         );
     }
 }
