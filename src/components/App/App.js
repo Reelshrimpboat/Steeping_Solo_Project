@@ -11,11 +11,11 @@ import {connect} from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import ProtectedRoute from '../LoginRegister/ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import Home from '../Home/Home';
-import SteepPage from '../SteepPage/SteepPage';
+import Home from '../HomeTimer/Home/Home';
+import SteepPage from '../HomeTimer/SteepPage/SteepPage';
 import UsersTeas from '../UsersTeas/UsersTeas';
 import Browse from '../Browse/Browse'
 

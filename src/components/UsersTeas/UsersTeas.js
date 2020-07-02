@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import OwnedTea from '../TeaItemOwned/TeaItemOwned'
-import FavoriteTea from '../TeaItemFavorite/TeaItemFavorite'
+import OwnedTea from '../TeaItems/TeaItemOwned/TeaItemOwned'
+import FavoriteTea from '../TeaItems/TeaItemFavorite/TeaItemFavorite'
 
 class usersTeas extends React.Component {
  componentDidMount() {

@@ -142,4 +142,26 @@ router.post('/favorite/:id', (req, res) => {
     }
 }); //END POST for favorite
 
+//POST for rating
+router.post('/rating/:id', (req, res) => {
+    const queryText = `INSERT INTO "user_teas"
+                ("user_id", "tea_id", "rating")
+                SELECT $1, $2, $3
+                ON CONFLICT ON CONSTRAINT user_teas_uq
+                DO UPDATE SET "rating"=$4;`
+
+    console.log('Rating post request, user id:', req.user.id, 'tea_id:', req.params.id, 'rating:', req.body.status)
+    if (req.isAuthenticated(queryText)) {
+        pool.query(queryText, [req.user.id, req.params.id, req.body.status, req.body.status])
+            .then((results) => {
+                res.send(results);
+            }).catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+}); //END POST for rating
+
 module.exports = router;

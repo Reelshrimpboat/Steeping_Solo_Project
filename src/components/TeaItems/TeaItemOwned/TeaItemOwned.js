@@ -31,10 +31,10 @@ class TeaItemOwned extends React.Component {
     }
 
     steepTea = () => {
-        this.props.dispatch({
-            type: 'SET_TIMED_TEA',
-            payload: this.props.tea
-        })
+        // this.props.dispatch({
+        //     type: 'SET_TIMED_TEA',
+        //     payload: this.props.tea
+        // })
     }
 
     render() {

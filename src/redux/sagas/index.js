@@ -8,6 +8,7 @@ import ratingSaga from './ratingSaga';
 import fetchReviewSaga from './fetchReviewSaga';
 import postOwnedSaga from './postOwnedSaga';
 import postFavoriteSaga from './postFavoriteSaga';
+import postRatingSaga from './postRatingSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,7 @@ export default function* rootSaga() {
     fetchReviewSaga(),
     postOwnedSaga(),
     postFavoriteSaga(),
+    postRatingSaga(),
+    postRatingSaga(),
   ]);
 }

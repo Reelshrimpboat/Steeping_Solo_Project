@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Review from '../Review/Review'
+import Review from '../ReviewItem/ReviewItem'
 
 
 class Browse extends Component {
@@ -129,7 +129,6 @@ class Browse extends Component {
             {this.props.rating &&
             <p>Rating: {this.props.rating.rating}</p>
             }
-            {console.log('is it owned:' , this.state.owned)}
             <button onClick={this.rateTea}>Rate Tea</button>
             {this.state.owned ?
             <button onClick={this.removeOwnedTea}>Remove from Owned</button>
