@@ -12,12 +12,15 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../LoginRegister/ProtectedRoute/ProtectedRoute'
+import AdminRoute from '../Admin/AdminRouteProtect/AdminRouteProtect'
 
 import AboutPage from '../AboutPage/AboutPage';
 import Home from '../HomeTimer/Home/Home';
 import SteepPage from '../HomeTimer/SteepPage/SteepPage';
 import UsersTeas from '../UsersTeas/UsersTeas';
 import Browse from '../Browse/Browse'
+import AdminAdd from '../Admin/AdminAdd/AdminAdd'
+import AdminList from '../Admin/AdminList/AdminList'
 
 import './App.css';
 
@@ -68,6 +71,17 @@ class App extends Component {
               exact
               path="/browse"
               component={Browse}
+            />
+            {/* Protected routes for Admins */}
+            <AdminRoute
+              exact
+              path="/admin/add"
+              component={AdminAdd}
+            />
+            <AdminRoute
+              exact
+              path="/admin/list"
+              component={AdminList}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

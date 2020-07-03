@@ -6,7 +6,9 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 //GET Route
 router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM teas ORDER BY "id";`;
+    const queryText = `SELECT "teas"."id", "teas"."name", "brand", "temp_F", "min_time", "max_time", "bitters", "description", "picture", "google_search_id", "categories"."name" AS "kind" FROM "teas"
+                        FULL JOIN "categories" ON "teas"."kind_id" = "categories"."id"
+                        ORDER BY "teas"."id";`;
     pool.query(queryText)
         .then((result) => {
             console.log(`Returned from the database`, result);
