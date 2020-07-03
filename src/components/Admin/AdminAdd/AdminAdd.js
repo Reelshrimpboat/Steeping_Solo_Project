@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 class AdminAdd extends Component {
@@ -14,12 +15,18 @@ class AdminAdd extends Component {
     // tea.description
     // tea.picture
     // tea.google_search_id
- render() {
-   return (
-    <section>
-     </section>
-   )
- }
+  render() {
+    return (
+      <section>
+          <Link className="nav-link" to="/admin/Home">
+              Back To Tools
+          </Link>
+          <Link className="nav-link" to="/admin/list">
+              Review/Edit Tea Database
+          </Link>
+      </section>
+    )
+  }
 }
 
 // this allows us to use <App /> in index.js

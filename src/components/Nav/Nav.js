@@ -31,6 +31,11 @@ const Nav = (props) => (
           </Link>
         </>
         }
+        {props.user.auth_level > 1 &&
+        <Link className="nav-link" to="/admin/Home">
+            Admin Tools
+          </Link>
+        }
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">
         About

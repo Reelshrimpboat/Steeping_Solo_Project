@@ -19,6 +19,7 @@ import Home from '../HomeTimer/Home/Home';
 import SteepPage from '../HomeTimer/SteepPage/SteepPage';
 import UsersTeas from '../UsersTeas/UsersTeas';
 import Browse from '../Browse/Browse'
+import AdminHome from '../Admin/AdminHome/AdminHome'
 import AdminAdd from '../Admin/AdminAdd/AdminAdd'
 import AdminList from '../Admin/AdminList/AdminList'
 
@@ -74,6 +75,11 @@ class App extends Component {
             />
             {/* Protected routes for Admins */}
             <AdminRoute
+              exact
+              path="/admin/Home"
+              component={AdminHome}
+            />
+                        <AdminRoute
               exact
               path="/admin/add"
               component={AdminAdd}

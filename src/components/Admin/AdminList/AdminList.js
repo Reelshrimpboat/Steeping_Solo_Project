@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 class AdminList extends Component {
@@ -7,6 +8,12 @@ class AdminList extends Component {
  render() {
    return (
     <section>
+        <Link className="nav-link" to="/admin/Home">
+            Back To Tools
+        </Link>
+        <Link className="nav-link" to="/admin/add">
+            Add A Tea to the Database
+        </Link>
         <table>
             <thead>
                 <tr>
