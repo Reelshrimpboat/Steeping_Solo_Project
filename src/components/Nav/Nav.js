@@ -11,9 +11,14 @@ const Nav = (props) => (
     </Link>
     <div className="nav-right">
 
-          <Link className="nav-link" to="/home">
-            Timer
+        {props.user.auth_level > 1 &&
+          <Link className="nav-link" to="/admin/Home">
+            Admin Tools
           </Link>
+        }
+        <Link className="nav-link" to="/home">
+          Timer
+        </Link>
         {props.user.id ?
         <>
           <Link className="nav-link" to="/yourTeas">
@@ -30,11 +35,6 @@ const Nav = (props) => (
             Log In/ Register
           </Link>
         </>
-        }
-        {props.user.auth_level > 1 &&
-        <Link className="nav-link" to="/admin/Home">
-            Admin Tools
-          </Link>
         }
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">
