@@ -73,18 +73,20 @@ class AdminAdd extends Component {
             <br />
             {/* Make radial input menu for whether it bitters or not */}
             <label>Description</label>
-            <input type="text"
+            <textarea type="text"
             onChange={this.handleChange}
             value={this.state.description}
             name="description"
-            placeholder="Description"></input>
+            placeholder="Description"
+            className="descriptionInput"></textarea>
             <br />
             <label>Image URL</label>
             <textarea type="text"
             onChange={this.handleChange}
             value={this.state.picture}
             name="picture"
-            placeholder="Picture"></textarea>
+            placeholder="Picture"
+            className="pictureInput"></textarea>
             <br />
             <label>Goolge Price Tracking ID</label>
             <input type="text"
