@@ -7,8 +7,12 @@ function* postOwnedSaga () {
 }
 
 function* ownedTea (action) {
-    yield axios.post (`/api/usersteas/owned/${action.payload.id}`, {status: action.payload.status})
-    yield put({ type: 'FETCH_USERS_TEAS' });
+    try {
+        yield axios.post (`/api/usersteas/owned/${action.payload.id}`, {status: action.payload.status})
+        yield put({ type: 'FETCH_USERS_TEAS' });
+    } catch (error) {
+        console.log('Error with Owned POST', error);
+    };
 }
 
 export default postOwnedSaga;

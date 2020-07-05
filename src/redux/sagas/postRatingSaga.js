@@ -7,8 +7,12 @@ function* postRatingSaga () {
 }
 
 function* ratingTea (action) {
-    yield axios.post (`/api/usersteas/rating/${action.payload.id}`, {status: action.payload.status})
-    yield put({ type: 'FETCH_USERS_TEAS' });
+    try {
+        yield axios.post (`/api/usersteas/rating/${action.payload.id}`, {status: action.payload.status})
+        yield put({ type: 'FETCH_USERS_TEAS' });
+    } catch (error) {
+        console.log('Error with Rating POST', error);
+    };
 }
 
 export default postRatingSaga;

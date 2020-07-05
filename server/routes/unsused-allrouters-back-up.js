@@ -65,23 +65,6 @@ router.get('/users/', rejectUnauthenticated, (req, res) => {
     }
 });
 
-//GET Rating Route
-router.get('/ratings/', (req, res) => {
-    const queryText = `SELECT "user_teas"."tea_id", ROUND(AVG("rating"), 2) AS "rating" FROM "teas"
-                        FULL JOIN "user_teas" ON "teas"."id" = "user_teas"."tea_id"
-                        GROUP BY "user_teas"."tea_id"
-                        ORDER BY "user_teas"."tea_id";`;
-    pool.query(queryText)
-        .then((result) => {
-            console.log(`GET Ratings database request successful`, result);
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            console.log(`Error making GET Ratings for teas:`, error);
-            res.sendStatus(500);
-        })
-}); //END GET Rating Route
-
 //GET Review Route
 router.get('/review/:id', (req, res) => {
     const queryText = `SELECT "user_teas"."id", "tea_id", "rating", "review", "username", "user_id" FROM "user_teas"

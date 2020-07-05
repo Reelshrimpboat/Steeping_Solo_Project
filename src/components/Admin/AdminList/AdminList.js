@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 
 class AdminList extends Component {
 
+    editClick = (event) => {
+        this.props.history.push(`/admin/edit/${event.target.id}`);
+    }
+
  render() {
    return (
     <section>
@@ -29,6 +33,7 @@ class AdminList extends Component {
                     <th>Google Ref ID</th>
                 </tr>
             </thead>
+            <tbody>
         {this.props.teas &&
             this.props.teas.map((tea) => 
                 <tr key={tea.id}>
@@ -42,9 +47,11 @@ class AdminList extends Component {
                     <td>{tea.description}</td>
                     <td>{tea.picture}</td>
                     <td>{tea.google_search_id}</td>
+                    <td><button onClick={this.editClick} id={tea.id}>Edit Tea</button></td>
                 </tr>
             )
         }
+        </tbody>
         </table>
      </section>
    )

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
-import LoggedOut from '../TimerPage/TimerPage';
-import LoggedIn from '../TimerPageLoggedIn/TimerPageLoggedIn';
+import LoggedOut from '../HomePage/HomePage';
+import LoggedIn from '../HomePageLoggedIn/HomePageLoggedIn';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component

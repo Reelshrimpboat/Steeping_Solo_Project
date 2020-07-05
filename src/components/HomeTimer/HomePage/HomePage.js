@@ -13,7 +13,7 @@ class Home extends Component {
   }
 
  steepClick = () => {
-  this.props.history.push('/steep');
+  this.props.history.push(`/steep`);
  }
 
  render() {

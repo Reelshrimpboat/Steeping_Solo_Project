@@ -22,14 +22,17 @@ import Browse from '../Browse/Browse'
 import AdminHome from '../Admin/AdminHome/AdminHome'
 import AdminAdd from '../Admin/AdminAdd/AdminAdd'
 import AdminList from '../Admin/AdminList/AdminList'
+import AdminEdit from '../Admin/AdminEdit/AdminEdit'
 
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
-    this.props.dispatch({type: 'FETCH_TEAS'})
-    this.props.dispatch({type: 'FETCH_RATINGS'})
+  async componentDidMount () {
+    console.log('app did mount first');
+    this.props.dispatch({type: 'FETCH_USER'});
+    this.props.dispatch({type: 'FETCH_TEAS'});
+    this.props.dispatch({type: 'FETCH_RATINGS'});
+    console.log('app did mount second');
   }
 
   render() {
@@ -79,7 +82,7 @@ class App extends Component {
               path="/admin/Home"
               component={AdminHome}
             />
-                        <AdminRoute
+            <AdminRoute
               exact
               path="/admin/add"
               component={AdminAdd}
@@ -88,6 +91,11 @@ class App extends Component {
               exact
               path="/admin/list"
               component={AdminList}
+            />
+            <AdminRoute
+              exact
+              path="/admin/edit/:id"
+              component={AdminEdit}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

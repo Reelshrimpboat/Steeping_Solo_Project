@@ -44,4 +44,45 @@ router.post('/', (req, res) => {
 }); //END POST for owned
 //END Routes for Teas
 
+//PUT for Teas
+router.put('/', (req, res) => {
+    const queryText = `UPDATE "teas"
+        SET ("name", "brand", "temp_F", "min_time", "max_time", "bitters", "description", "picture", "google_search_id") = 
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        WHERE "id" = $10;
+        ;`
+    const tea = req.body;
+    console.log('Tea submission request post request, req.user:', req.user, 'req.body:', req.body)
+    if (req.isAuthenticated(queryText) && req.user.auth_level > 1) {
+            pool.query(queryText, [tea.name, tea.kind_id, tea.temp_F, tea.min_time, tea.max_time, tea.bitters, tea.description, tea.picture, tea.google_search_id, req.body.id])
+            .then((results) => {
+                res.send(results);
+            }).catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            })
+        }
+        else{
+            res.sendStatus(403);
+        }
+}); //END Put
+//END Routes for Teas
+
+//GET Rating Route
+router.get('/ratings/', (req, res) => {
+    const queryText = `SELECT "user_teas"."tea_id", ROUND(AVG("rating"), 2) AS "rating" FROM "teas"
+                        FULL JOIN "user_teas" ON "teas"."id" = "user_teas"."tea_id"
+                        GROUP BY "user_teas"."tea_id"
+                        ORDER BY "user_teas"."tea_id";`;
+    pool.query(queryText)
+        .then((result) => {
+            console.log(`GET Ratings database request successful`, result);
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error making GET Ratings for teas:`, error);
+            res.sendStatus(500);
+        })
+}); //END GET Rating Route
+
 module.exports = router;

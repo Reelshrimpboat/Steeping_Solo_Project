@@ -3,7 +3,28 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
-class AdminAdd extends Component {
+class AdminEdit extends Component {
+
+  componentDidMount(){
+    console.log('admin did mount first');
+    let tea = this.props.teas[this.props.match.params.id-1]
+    let convertedMin = tea.min_time / 60
+    let convertedMax = tea.max_time / 60
+    console.log("Our Tea is:", tea)
+    this.setState({
+      name: tea.name,
+      brand: tea.brand,
+      kind: tea.kind,
+      temp_F: tea.temp_F,
+      min_time: convertedMin,
+      max_time: convertedMax,
+      bitters: tea.bitters,
+      description: tea.description,
+      picture: tea.picture,
+      google_search_id: tea.google_search_id
+    })
+  }
+
   state = {
     name: '',
     brand: '',
@@ -27,11 +48,26 @@ class AdminAdd extends Component {
 
     event.preventDefault();
 
+    let data = {
+      id: this.props.match.params.id,
+      name: this.state.name,
+      brand: this.state.brand,
+      kind: this.state.kind,
+      temp_F: this.state.temp_F,
+      min_time: this.state.min_time*60,
+      max_time: this.state.max_time*60,
+      bitters: this.state.bitters,
+      description: this.state.description,
+      picture: this.state.picture,
+      google_search_id: this.state.google_search_id
+    }
     this.props.dispatch({
-      type: 'SUBMIT_TEA',
-      payload: this.state
+      type: 'EDIT_TEA',
+      payload: data
     })
+
     this.props.history.push(`/admin/list`);
+
   }
 
   render() {
@@ -113,5 +149,11 @@ class AdminAdd extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  teas: state.teas,
+  usersTeas: state.usersTeas,
+  ratings: state.ratings,
+});
+
 // this allows us to use <App /> in index.js
-export default connect() (AdminAdd);
+export default connect(mapStateToProps) (AdminEdit);
