@@ -23,6 +23,13 @@ class AdminAdd extends Component {
     })
   }
 
+  handleSubmit = () => {
+    this.props.dispatch({
+      type: 'SUBMIT_TEA',
+      payload: this.state
+    })
+  }
+
   render() {
     return (
       <section>
@@ -95,6 +102,7 @@ class AdminAdd extends Component {
             name = "google_search_id"
             placeholder="Google Shopping Search ID"></input>
             <br />
+            <button onClick={this.handleSubmit}>Submit</button>
           </form>
       </section>
     )

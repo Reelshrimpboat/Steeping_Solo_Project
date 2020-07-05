@@ -8,7 +8,7 @@ function* listSaga() {
 
 function* fetchTeas() {
     try {
-        const response = yield axios.get('/api/teas/users/');
+        const response = yield axios.get('/api/usersteas/');
         yield put({ type: 'SET_USERS_TEAS', payload: response.data });
     } catch (error) {
         console.log('List get request failed', error);

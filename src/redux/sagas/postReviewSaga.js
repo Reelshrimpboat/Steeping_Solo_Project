@@ -8,7 +8,7 @@ function* postReviewSaga () {
 
 function* postReview (action) {
     console.log(action.payload.id)
-    yield axios.post (`/api/teas/review/${action.payload.id}`, {review: action.payload.review, rating: action.payload.rating})
+    yield axios.post (`/api/reviews/${action.payload.id}`, {review: action.payload.review, rating: action.payload.rating})
     yield put({ type: 'FETCH_REVIEWS', payload: action.payload.id });
     yield put({ type: 'FETCH_USERS_TEAS' });
 }

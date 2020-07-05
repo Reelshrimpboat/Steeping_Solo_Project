@@ -7,7 +7,7 @@ function* postRatingSaga () {
 }
 
 function* ratingTea (action) {
-    yield axios.post (`/api/teas/rating/${action.payload.id}`, {status: action.payload.status})
+    yield axios.post (`/api/usersteas/rating/${action.payload.id}`, {status: action.payload.status})
     yield put({ type: 'FETCH_USERS_TEAS' });
 }
 

@@ -7,7 +7,7 @@ function* postFavoriteSaga () {
 }
 
 function* favoriteTea (action) {
-    yield axios.post (`/api/teas/favorite/${action.payload.id}`, {status: action.payload.status})
+    yield axios.post (`/api/usersteas/favorite/${action.payload.id}`, {status: action.payload.status})
     yield put({ type: 'FETCH_USERS_TEAS' });
 }
 
