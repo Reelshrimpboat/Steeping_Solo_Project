@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
+import {ModalContainer, ModalRoute} from 'react-router-modal'
 
 import BrowseTea from '../TeaItems/TeaItemBrowse/TeaItemBrowse'
 import TeaPage from '../TeaPage/TeaPage'
@@ -14,13 +10,18 @@ import TeaPage from '../TeaPage/TeaPage'
 
 class Browse extends Component {
 
+  async componentDidMount() {
+        await this.props.dispatch({type: 'FETCH_USERS_TEAS'})
+    }
+  
  render() {
+   const { match } = this.props;
    return (
     <section>
         {this.props.teas &&
           this.props.teas.map((tea) => 
               <Link key={tea.id} to={{
-                pathname: `/tea`,
+                pathname: `${match.url}/tea`,
                 tea: tea,
                 state: { modal: true }
               }}>

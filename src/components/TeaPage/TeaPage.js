@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Review from '../ReviewItem/ReviewItem'
 import ReviewField from '../InputButtons/ReviewField/ReviewField'
 import RatingButton from '../InputButtons/RatingButton/RatingButton'
-import './TeaPage.css'
 
 
 class Browse extends Component {
@@ -115,7 +114,8 @@ class Browse extends Component {
     checkIfReviewed = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
             const element = this.props.usersTeas[index];
-            if (this.props.location.tea.id == element.id && element.review !== null ) {
+            console.log('review,' , element.review)
+            if (this.props.location.tea.id == element.id && element.review !== null) {
                 this.setState({
                     reviewed: true
                 })
@@ -128,8 +128,8 @@ class Browse extends Component {
         return false
     }
 
-    componentDidMount(){
-        this.getReviews();
+    async componentDidMount(){
+        await this.getReviews();
         this.checkIfOwned();
         this.checkIfFavorited();
         this.checkIfReviewed();
@@ -158,7 +158,7 @@ class Browse extends Component {
     let tea = this.props.location.tea
     let imageDescription = `A cup of ${tea.name}`;
     return(
-        <div className="modal">
+        <div>
             <h2>{tea.name}</h2>
             <img src={tea.picture} alt={imageDescription} width="300"></img>
             <p>{tea.description}</p>

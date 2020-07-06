@@ -8,6 +8,8 @@ import {
 
 import {connect} from 'react-redux';
 
+import {ModalContainer, ModalRoute} from 'react-router-modal'
+
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
@@ -26,6 +28,7 @@ import AdminEdit from '../Admin/AdminEdit/AdminEdit'
 import TeaPage from '../TeaPage/TeaPage'
 
 import './App.css';
+import './react-router-modal.css';
 
 class App extends Component {
   componentDidMount () {
@@ -73,14 +76,8 @@ class App extends Component {
               component={UsersTeas}
             />
             <ProtectedRoute
-              exact
               path="/browse"
               component={Browse}
-            />
-            <ProtectedRoute
-              exact
-              path="/tea"
-              component={TeaPage}
             />
             {/* Protected routes for Admins */}
             <AdminRoute
@@ -106,6 +103,13 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
+          <ModalRoute
+            exact
+            path={`/browse/tea`}
+            parentPath='/browse'
+            component={TeaPage}
+          />
+          <ModalContainer />
           <Footer />
         </div>
       </Router>
