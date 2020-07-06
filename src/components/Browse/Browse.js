@@ -6,8 +6,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
-import ProtectedRoute from '../LoginRegister/ProtectedRoute/ProtectedRoute'
+import { Link } from 'react-router-dom';
 
 import BrowseTea from '../TeaItems/TeaItemBrowse/TeaItemBrowse'
 import TeaPage from '../TeaPage/TeaPage'
@@ -15,28 +14,23 @@ import TeaPage from '../TeaPage/TeaPage'
 
 class Browse extends Component {
 
-   selectTea = (event) => {
-     this.props.history.push(`/tea/${event.target.id}`);
-   }
-
  render() {
    return (
     <section>
         {this.props.teas &&
           this.props.teas.map((tea) => 
-              <BrowseTea key={tea.id} tea={tea} id={tea.id} rating={this.props.ratings[tea.id-1]} onClick={this.selectTea}/>
+              <Link key={tea.id} to={{
+                pathname: `/tea`,
+                tea: tea,
+                state: { modal: true }
+              }}>
+              <BrowseTea tea={tea} id={tea.id} rating={this.props.ratings[tea.id-1]} />
+              </Link>
           )
         }
-        {this.props.teas[0] &&
+        {/* {this.props.teas[0] &&
         <TeaPage tea={this.props.teas[2]} /> 
-        }
-        <Router>
-          <ProtectedRoute
-              exact
-              path="/tea/:id"
-              component={TeaPage}
-            />
-        </Router>
+        } */}
      </section>
    )
  }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Review from '../ReviewItem/ReviewItem'
 import ReviewField from '../InputButtons/ReviewField/ReviewField'
 import RatingButton from '../InputButtons/RatingButton/RatingButton'
+import './TeaPage.css'
 
 
 class Browse extends Component {
@@ -19,7 +20,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_OWNED_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: true
                 }
             })
@@ -31,7 +32,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_OWNED_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: false
                 }
             })
@@ -44,7 +45,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_FAVORITE_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: true
                 }
             })
@@ -56,7 +57,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_FAVORITE_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: false
                 }
             })
@@ -70,7 +71,7 @@ class Browse extends Component {
         //GET request
         this.props.dispatch({
             type: 'FETCH_REVIEWS',
-            payload: this.props.tea.id
+            payload: this.props.location.tea.id
         })
         // let reviewsGotten = this.props.reviews.map((review) => {return review})
         // console.log(reviewsGotten);
@@ -84,7 +85,7 @@ class Browse extends Component {
     checkIfOwned = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
             const element = this.props.usersTeas[index];
-            if(this.props.tea.id == element.id && element.owned === true){
+            if(this.props.location.tea.id == element.id && element.owned === true){
                 this.setState({
                     owned: true
                 })
@@ -99,7 +100,7 @@ class Browse extends Component {
     checkIfFavorited = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
             const element = this.props.usersTeas[index];
-            if(this.props.tea.id == element.id && element.favorited === true){
+            if(this.props.location.tea.id == element.id && element.favorited === true){
                 this.setState({
                     favorited: true
                 })
@@ -114,7 +115,7 @@ class Browse extends Component {
     checkIfReviewed = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
             const element = this.props.usersTeas[index];
-            if (this.props.tea.id == element.id && element.review !== null ) {
+            if (this.props.location.tea.id == element.id && element.review !== null ) {
                 this.setState({
                     reviewed: true
                 })
@@ -154,17 +155,17 @@ class Browse extends Component {
 
 
  render() {
-    let tea = this.props.tea
+    let tea = this.props.location.tea
     let imageDescription = `A cup of ${tea.name}`;
     return(
-        <div>
+        <div className="modal">
             <h2>{tea.name}</h2>
             <img src={tea.picture} alt={imageDescription} width="300"></img>
             <p>{tea.description}</p>
             {this.props.rating &&
             <p>Rating: {this.props.rating.rating}</p>
             }
-            <RatingButton tea_id={this.props.tea.id} rating={this.props.tea.rating}/>
+            <RatingButton tea_id={this.props.location.tea.id} rating={this.props.location.tea.rating}/>
             {this.state.owned ?
             <button onClick={this.removeOwnedTea}>Remove from Owned</button>
             :

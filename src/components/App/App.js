@@ -23,6 +23,7 @@ import AdminHome from '../Admin/AdminHome/AdminHome'
 import AdminAdd from '../Admin/AdminAdd/AdminAdd'
 import AdminList from '../Admin/AdminList/AdminList'
 import AdminEdit from '../Admin/AdminEdit/AdminEdit'
+import TeaPage from '../TeaPage/TeaPage'
 
 import './App.css';
 
@@ -75,6 +76,11 @@ class App extends Component {
               exact
               path="/browse"
               component={Browse}
+            />
+            <ProtectedRoute
+              exact
+              path="/tea"
+              component={TeaPage}
             />
             {/* Protected routes for Admins */}
             <AdminRoute
