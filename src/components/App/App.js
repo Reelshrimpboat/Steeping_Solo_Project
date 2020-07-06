@@ -32,11 +32,8 @@ import './react-router-modal.css';
 
 class App extends Component {
   componentDidMount () {
-    console.log('app did mount first');
     this.props.dispatch({type: 'FETCH_USER'});
     this.props.dispatch({type: 'FETCH_TEAS'});
-    this.props.dispatch({type: 'FETCH_RATINGS'});
-    console.log('app did mount second');
   }
 
   render() {

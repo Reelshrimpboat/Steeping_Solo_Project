@@ -4,7 +4,6 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import teasSaga from './teasSaga';
 import usersTeasSaga from './usersTeasSaga';
-import ratingSaga from './ratingSaga';
 import fetchReviewSaga from './fetchReviewSaga';
 import postOwnedSaga from './postOwnedSaga';
 import postFavoriteSaga from './postFavoriteSaga';
@@ -27,7 +26,6 @@ export default function* rootSaga() {
     userSaga(),
     teasSaga(),
     usersTeasSaga(),
-    ratingSaga(),
     fetchReviewSaga(),
     postOwnedSaga(),
     postFavoriteSaga(),

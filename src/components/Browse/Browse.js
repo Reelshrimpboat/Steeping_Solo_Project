@@ -25,7 +25,7 @@ class Browse extends Component {
                 tea: tea,
                 state: { modal: true }
               }}>
-              <BrowseTea tea={tea} id={tea.id} rating={this.props.ratings[tea.id-1]} />
+              <BrowseTea tea={tea} id={tea.id} rating={tea.rating} />
               </Link>
           )
         }

@@ -6,9 +6,11 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 //Tea Routes
 //GET Route
 router.get('/', (req, res) => {
-    const queryText = `SELECT "teas"."id", "teas"."name", "brand", "temp_F", "min_time", "max_time", "bitters", "description", "picture", "google_search_id", "categories"."name" AS "kind" FROM "teas"
-                        FULL JOIN "categories" ON "teas"."kind_id" = "categories"."id"
-                        ORDER BY "teas"."id";`;
+    const queryText = `SELECT "user_teas"."tea_id", "teas"."id", "kind_id", "teas"."name", "brand", "temp_F", "min_time", "max_time", "bitters", "description", "picture", "google_search_id", "categories"."name" AS "kind", ROUND(AVG("rating"), 2) AS "rating" FROM "teas"
+                            FULL JOIN "categories" ON "teas"."kind_id" = "categories"."id"
+                            FULL JOIN "user_teas" ON "teas"."id" = "user_teas"."tea_id"
+                            GROUP BY  "teas"."id", "user_teas"."tea_id", "kind_id", "teas"."name", "brand", "temp_F", "min_time", "max_time", "bitters", "description", "picture", "google_search_id", "categories"."name"
+                            ORDER BY "teas"."id";`;
     pool.query(queryText)
         .then((result) => {
             //console.log(`Returned from the database`, result);

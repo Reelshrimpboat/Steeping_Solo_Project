@@ -15,7 +15,7 @@ class TeaItemFavorite extends React.Component {
                     <img src={tea.picture} alt={imageDescription} width="300"></img>
                     <p>{tea.description}</p>
                     {this.props.rating &&
-                    <p>Rating: {this.props.rating.rating}</p>
+                    <p>Rating: {this.props.rating}</p>
                     }
                 </div>
         );

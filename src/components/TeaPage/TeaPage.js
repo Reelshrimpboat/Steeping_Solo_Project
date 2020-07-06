@@ -161,6 +161,7 @@ class Browse extends Component {
         <div>
             <h2>{tea.name}</h2>
             <img src={tea.picture} alt={imageDescription} width="300"></img>
+            <p>Average Rating: {tea.rating}</p>
             <p>{tea.description}</p>
             {this.props.rating &&
             <p>Rating: {this.props.rating.rating}</p>
