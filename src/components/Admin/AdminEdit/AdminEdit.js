@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 
 class AdminEdit extends Component {
 
-  componentDidMount(){
-    console.log('admin did mount first');
-    let tea = this.props.teas[this.props.match.params.id-1]
+  setTea(){
+
+    let filteredArray = this.props.teas.filter((tea) => tea.id == this.props.match.params.id)
+    let tea = filteredArray[0]
+    
     let convertedMin = tea.min_time / 60
     let convertedMax = tea.max_time / 60
-    console.log("Our Tea is:", tea)
     this.setState({
+      teaLoaded: true,
       name: tea.name,
       brand: tea.brand,
       kind: tea.kind,
@@ -26,6 +28,7 @@ class AdminEdit extends Component {
   }
 
   state = {
+    teaLoaded: false,
     name: '',
     brand: '',
     kind: 0,
@@ -73,6 +76,8 @@ class AdminEdit extends Component {
   render() {
     return (
       <section>
+        {this.props.teas[1] && this.state.teaLoaded === false &&
+        this.setTea()}
           <Link className="nav-link" to="/admin/Home">
               Back To Tools
           </Link>

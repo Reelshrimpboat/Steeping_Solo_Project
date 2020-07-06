@@ -27,7 +27,7 @@ import AdminEdit from '../Admin/AdminEdit/AdminEdit'
 import './App.css';
 
 class App extends Component {
-  async componentDidMount () {
+  componentDidMount () {
     console.log('app did mount first');
     this.props.dispatch({type: 'FETCH_USER'});
     this.props.dispatch({type: 'FETCH_TEAS'});
