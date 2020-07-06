@@ -71,7 +71,7 @@ class ReviewField extends React.Component {
                 </form>
                 </label>
                 <label htmlFor="SaveButton">
-                <button onClick={this.addButton}>Add Review</button>
+                <button onClick={this.addButton}> Save Review</button>
                 </label>
 
             </>

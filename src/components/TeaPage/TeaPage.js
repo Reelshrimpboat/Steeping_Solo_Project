@@ -184,7 +184,7 @@ class Browse extends Component {
                     return <div key={review.id} className="usersReview">
                         {this.state.reviewToggled === true ?
                             <>
-                                <ReviewField review={review.review} rating={review.rating} />
+                                <ReviewField review={review.review} rating={review.rating} tea_id={tea.tea_id}/>
                                 <button onClick={this.reviewToggleOff}>Done Editing</button>
                             </>
                         :

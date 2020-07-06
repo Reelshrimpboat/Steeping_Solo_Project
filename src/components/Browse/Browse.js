@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import {ModalContainer, ModalRoute} from 'react-router-modal'
-
 import BrowseTea from '../TeaItems/TeaItemBrowse/TeaItemBrowse'
-import TeaPage from '../TeaPage/TeaPage'
 
 
 class Browse extends Component {
@@ -29,9 +26,6 @@ class Browse extends Component {
               </Link>
           )
         }
-        {/* {this.props.teas[0] &&
-        <TeaPage tea={this.props.teas[2]} /> 
-        } */}
      </section>
    )
  }
