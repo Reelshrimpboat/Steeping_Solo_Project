@@ -19,7 +19,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_OWNED_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: true
                 }
             })
@@ -31,7 +31,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_OWNED_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: false
                 }
             })
@@ -44,7 +44,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_FAVORITE_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: true
                 }
             })
@@ -56,7 +56,7 @@ class Browse extends Component {
             this.props.dispatch({
                 type: 'CHANGE_FAVORITE_STATUS',
                 payload: {
-                    id: this.props.tea.id,
+                    id: this.props.location.tea.id,
                     status: false
                 }
             })
@@ -70,7 +70,7 @@ class Browse extends Component {
         //GET request
         this.props.dispatch({
             type: 'FETCH_REVIEWS',
-            payload: this.props.tea.id
+            payload: this.props.location.tea.id
         })
         // let reviewsGotten = this.props.reviews.map((review) => {return review})
         // console.log(reviewsGotten);
@@ -83,8 +83,8 @@ class Browse extends Component {
 
     checkIfOwned = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
-            const element = this.props.usersTeas[index];
-            if(this.props.tea.id == element.id && element.owned === true){
+            const tea = this.props.usersTeas[index];
+            if(this.props.location.tea.id == tea.tea_id && tea.owned === true){
                 this.setState({
                     owned: true
                 })
@@ -98,8 +98,8 @@ class Browse extends Component {
     }
     checkIfFavorited = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
-            const element = this.props.usersTeas[index];
-            if(this.props.tea.id == element.id && element.favorited === true){
+            const tea = this.props.usersTeas[index];
+            if(this.props.location.tea.id == tea.tea_id && tea.favorited === true){
                 this.setState({
                     favorited: true
                 })
@@ -113,8 +113,9 @@ class Browse extends Component {
     }
     checkIfReviewed = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
-            const element = this.props.usersTeas[index];
-            if (this.props.tea.id == element.id && element.review !== null ) {
+            const tea = this.props.usersTeas[index];
+            console.log('review,' , tea.tea_id , this.props.location.tea.id) 
+            if (this.props.location.tea.id == tea.tea_id && tea.review !== null) {
                 this.setState({
                     reviewed: true
                 })
@@ -127,8 +128,8 @@ class Browse extends Component {
         return false
     }
 
-    componentDidMount(){
-        this.getReviews();
+    async componentDidMount(){
+        await this.getReviews();
         this.checkIfOwned();
         this.checkIfFavorited();
         this.checkIfReviewed();
@@ -154,17 +155,18 @@ class Browse extends Component {
 
 
  render() {
-    let tea = this.props.tea
+    let tea = this.props.location.tea
     let imageDescription = `A cup of ${tea.name}`;
     return(
         <div>
             <h2>{tea.name}</h2>
             <img src={tea.picture} alt={imageDescription} width="300"></img>
+            <p>Average Rating: {tea.rating}</p>
             <p>{tea.description}</p>
             {this.props.rating &&
             <p>Rating: {this.props.rating.rating}</p>
             }
-            <RatingButton tea_id={this.props.tea.id} rating={this.props.tea.rating}/>
+            <RatingButton tea_id={this.props.location.tea.id} rating={this.props.location.tea.rating}/>
             {this.state.owned ?
             <button onClick={this.removeOwnedTea}>Remove from Owned</button>
             :
@@ -182,7 +184,7 @@ class Browse extends Component {
                     return <div key={review.id} className="usersReview">
                         {this.state.reviewToggled === true ?
                             <>
-                                <ReviewField review={review.review} rating={review.rating} />
+                                <ReviewField review={review.review} rating={review.rating} tea_id={tea.tea_id}/>
                                 <button onClick={this.reviewToggleOff}>Done Editing</button>
                             </>
                         :

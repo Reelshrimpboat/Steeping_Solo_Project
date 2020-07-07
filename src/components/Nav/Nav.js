@@ -7,13 +7,18 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <h2 className="nav-title">Steeping Time</h2>
     </Link>
     <div className="nav-right">
 
-          <Link className="nav-link" to="/home">
-            Timer
+        {props.user.auth_level > 1 &&
+          <Link className="nav-link" to="/admin/Home">
+            Admin Tools
           </Link>
+        }
+        <Link className="nav-link" to="/home">
+          Timer
+        </Link>
         {props.user.id ?
         <>
           <Link className="nav-link" to="/yourTeas">
