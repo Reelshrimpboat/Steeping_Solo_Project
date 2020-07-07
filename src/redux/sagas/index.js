@@ -12,6 +12,7 @@ import postReviewSaga from './postReviewSaga';
 import postTeaSaga from './postTeaSaga';
 import updateTeaSaga from './updateTeaSaga';
 import deleteTeaSaga from './deleteTeaSaga';
+import removeReview from './removeReviewSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -35,5 +36,6 @@ export default function* rootSaga() {
     postTeaSaga(),
     updateTeaSaga(),
     deleteTeaSaga(),
+    removeReview(),
   ]);
 }

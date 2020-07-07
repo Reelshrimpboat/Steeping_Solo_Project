@@ -52,6 +52,24 @@ class ReviewField extends React.Component {
         }
     }
 
+    deleteReview = (event) => {
+        if (window.confirm('Are you sure you wish to delete this item?')) {
+            this.props.dispatch({
+                    type: 'REMOVE_REVIEW',
+                    payload: {
+                        id: this.props.tea_id
+                    }
+                }
+            )
+            this.props.changeToReviewed();
+            this.props.toggle();
+        }
+        else{
+            console.log('didnt delete that review');
+        }
+
+    }
+
     render() {
         return(
             <>
@@ -76,7 +94,10 @@ class ReviewField extends React.Component {
                 </Ratings>
                 </label>
                 <label htmlFor="SaveButton">
-                <button onClick={this.saveButton}> Save Review</button>
+                <button onClick={this.saveButton}>Save Review</button>
+                </label>
+                <label htmlFor="SaveButton">
+                <button onClick={this.deleteReview}>Delete Review</button>
                 </label>
 
             </>

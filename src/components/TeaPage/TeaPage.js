@@ -201,7 +201,7 @@ class Browse extends Component {
                                 toggle={this.reviewToggleOff}
                                 changeToReviewed={this.changeToReviewed}
                                 />
-                                {/* <button onClick={this.reviewToggleOff}>Done Editing</button> */}
+                                <button onClick={this.reviewToggleOff}>Cancel</button>
                             </>
                         :
                             <>
