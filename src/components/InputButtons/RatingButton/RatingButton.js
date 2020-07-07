@@ -1,19 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './RatingButton.css'
+import Ratings from 'react-ratings-declarative';
 
 class RatingButton extends React.Component {
 
-    state = {
-        starNumber: [1,2,3,4,5]
-    }
+    // changeRating( newRating ) {
+    //   this.setState({
+    //     rating: newRating
+    //   });
+    // }
 
-    changeRating = (event) => {
+    changeRating = (newRating) => {
         this.props.dispatch({
             type: 'CHANGE_RATING_STATUS',
             payload: {
                 id: this.props.tea_id,
-                status: event.target.value
+                status: newRating
             }
         })
     }
@@ -21,17 +24,19 @@ class RatingButton extends React.Component {
     render() {
         return(
             <label htmlFor="5-Star Rating">
-            <form id="starForm">
-                {this.state.starNumber.map((numb) => 
-                <input
-                key={numb} 
-                type="radio"
-                name="star"
-                value={numb} 
-                onChange={this.changeRating} 
-                />
-                )}
-            </form>
+                <Ratings
+                    rating={this.props.rating}
+                    widgetRatedColors = "gold"
+                    widgetDimensions = "24px"
+                    widgetSpacings = "0px"
+                    changeRating={this.changeRating}
+                >
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                </Ratings>
             </label>
         );
     }
