@@ -25,7 +25,18 @@ class AdminAdd extends Component {
 
   handleSubmit = (event) => {
 
-    event.preventDefault();
+    let data = {
+      name: this.state.name,
+      brand: this.state.brand,
+      kind: this.state.kind,
+      temp_F: this.state.temp_F,
+      min_time: this.state.min_time * 60,
+      max_time: this.state.max_time * 60,
+      bitters: this.state.bitters,
+      description: this.state.description,
+      picture: this.state.picture,
+      google_search_id: this.state.google_search_id
+    }
 
     this.props.dispatch({
       type: 'SUBMIT_TEA',

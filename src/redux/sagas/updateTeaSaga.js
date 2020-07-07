@@ -1,11 +1,11 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* PostTea () {
-    yield takeEvery('EDIT_TEA', submitTea);
+function* PutTea () {
+    yield takeEvery('EDIT_TEA', editTea);
 }
 
-function* submitTea (action) {
+function* editTea (action) {
     try {
         yield axios.put (`/api/teas/`, action.payload )
         yield put({ type: 'FETCH_TEAS' });
@@ -14,4 +14,4 @@ function* submitTea (action) {
     };
 }
 
-export default PostTea;
+export default PutTea;

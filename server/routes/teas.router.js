@@ -3,7 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-//Tea Routes
 //GET Route
 router.get('/', (req, res) => {
     const queryText = `SELECT "user_teas"."tea_id", "teas"."id", "kind_id", "teas"."name", "brand", "temp_F", "min_time", "max_time", "bitters", "description", "picture", "google_search_id", "categories"."name" AS "kind", ROUND(AVG("rating"), 2) AS "rating" FROM "teas"
@@ -13,7 +12,6 @@ router.get('/', (req, res) => {
                             ORDER BY "teas"."id";`;
     pool.query(queryText)
         .then((result) => {
-            //console.log(`Returned from the database`, result);
             res.send(result.rows);
         })
         .catch((error) => {
@@ -67,24 +65,27 @@ router.put('/', (req, res) => {
         else{
             res.sendStatus(403);
         }
-}); //END Put
-//END Routes for Teas
+}); //END PUT
 
-//GET Rating Route
-router.get('/ratings/', (req, res) => {
-    const queryText = `SELECT "user_teas"."tea_id", ROUND(AVG("rating"), 2) AS "rating" FROM "teas"
-                        FULL JOIN "user_teas" ON "teas"."id" = "user_teas"."tea_id"
-                        GROUP BY "user_teas"."tea_id"
-                        ORDER BY "user_teas"."tea_id";`;
-    pool.query(queryText)
+//DELETE ROUTE
+// DELETE Route
+router.delete('/delete/:id', (req, res) => {
+    let id = req.params.id; // id of the thing to delete
+    console.log('Delete route called with id of', id);
+    let queryText = `
+    DELETE FROM "teas"
+    WHERE id = $1;`;
+
+    pool.query(queryText , [id])
         .then((result) => {
-            console.log(`GET Ratings database request successful`, result);
-            res.send(result.rows);
+            console.log('Delete has worked!', result);
+            res.sendStatus(200);
         })
-        .catch((error) => {
-            console.log(`Error making GET Ratings for teas:`, error);
+        .catch((err) => {
+            console.log('Delete has failed.', err);
             res.sendStatus(500);
-        })
-}); //END GET Rating Route
+        });
+
+}); // END DELETE Route
 
 module.exports = router;

@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
-import teasSaga from './teasSaga';
+import fetchTeasSaga from './fetchTeasSaga';
 import usersTeasSaga from './usersTeasSaga';
 import fetchReviewSaga from './fetchReviewSaga';
 import postOwnedSaga from './postOwnedSaga';
@@ -11,6 +11,7 @@ import postRatingSaga from './postRatingSaga';
 import postReviewSaga from './postReviewSaga';
 import postTeaSaga from './postTeaSaga';
 import updateTeaSaga from './updateTeaSaga';
+import deleteTeaSaga from './deleteTeaSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -24,7 +25,7 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
-    teasSaga(),
+    fetchTeasSaga(),
     usersTeasSaga(),
     fetchReviewSaga(),
     postOwnedSaga(),
@@ -33,5 +34,6 @@ export default function* rootSaga() {
     postReviewSaga(),
     postTeaSaga(),
     updateTeaSaga(),
+    deleteTeaSaga(),
   ]);
 }

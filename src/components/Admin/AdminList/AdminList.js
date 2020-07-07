@@ -1,12 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import './AdminList.css'
 
 
 class AdminList extends Component {
 
     editClick = (event) => {
         this.props.history.push(`/admin/edit/${event.target.id}`);
+    }
+
+    deleteClick = (event) => {
+        if (window.confirm('Are you sure you wish to delete this item?')){
+            console.log('delete pressed, tea id:', event.target.id)
+            this.props.dispatch({
+                type: 'DELETE_TEA',
+                payload: event.target.id
+            })
+        }
+        else{
+            console.log('stopped the delete');
+        }
+        
     }
 
  render() {
@@ -40,14 +55,15 @@ class AdminList extends Component {
                     <td>{tea.name}</td>
                     <td>{tea.brand}</td>
                     <td>{tea.kind}</td>
-                    <td>{tea.temp_F}</td>
-                    <td>{tea.min_time}</td>
-                    <td>{tea.max_time}</td>
+                    <td>{tea.temp_F} &deg;F</td>
+                    <td>{tea.min_time/60} Minute(s)</td>
+                    <td>{tea.max_time/60} Minute(s)</td>
                     <td>{tea.bitters}</td>
                     <td>{tea.description}</td>
-                    <td>{tea.picture}</td>
+                    <td className="pictureColumn">{tea.picture}</td>
                     <td>{tea.google_search_id}</td>
-                    <td><button onClick={this.editClick} id={tea.id}>Edit Tea</button></td>
+                    <td><button onClick={this.editClick} id={tea.id}>Edit</button></td>
+                    <td><button onClick={this.deleteClick} id={tea.id}>Delete</button></td>
                 </tr>
             )
         }
