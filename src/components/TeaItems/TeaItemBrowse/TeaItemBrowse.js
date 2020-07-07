@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RatingsStars from '../../RatingStars/RatingStars'
 
-class TeaItemFavorite extends React.Component {
+class TeaItemFavorite extends Component {
     selectTea = (event) => {
         this.props.history.push(`/tea/${event.target.id}`);
     }
@@ -15,7 +16,7 @@ class TeaItemFavorite extends React.Component {
                     <img src={tea.picture} alt={imageDescription} width="300"></img>
                     <p>{tea.description}</p>
                     {this.props.rating &&
-                    <p>Rating: {this.props.rating}</p>
+                    <><h4>Rating:</h4> <RatingsStars number={parseInt(this.props.rating)} /></>
                     }
                 </div>
         );
