@@ -30,6 +30,10 @@ class TeaReview extends React.Component {
         })
     }
 
+    changeToReviewed = () => {
+        console.log('Reivew Updated');
+    }
+
     render() {
         let tea = this.props.tea
         return(
@@ -39,7 +43,13 @@ class TeaReview extends React.Component {
                         <>
                             {this.state.reviewTeaId == tea.tea_id &&
                                 <>
-                                    <ReviewField review={tea.review} rating={tea.rating} tea_id={tea.tea_id}/>
+                                    <ReviewField
+                                    review={tea.review}
+                                    rating={tea.rating}
+                                    tea_id={tea.tea_id}
+                                    toggle={this.reviewToggleOff}
+                                    changeToReviewed={this.changeToReviewed}
+                                    />
                                     <button onClick={this.reviewToggleOff}>Done Editing</button>
                                 </>
                             }

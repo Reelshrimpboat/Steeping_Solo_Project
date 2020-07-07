@@ -34,10 +34,10 @@ class ReviewField extends React.Component {
 
     saveButton = (event) => {
 
-        if(this.state.review !== '' & this.state.rating === 0){
+        if(this.state.review === '' || this.state.rating === 0){
             alert('Please input to both fields')
         } else {
-            console.log('to dispatch, review:', this.state.review, 'rating:', this.state.rating)
+            console.log('to dispatch, review:', this.state.review, 'rating:', this.state.rating, 'id:', this.props.tea_id)
             this.props.dispatch({
                 type: 'CHANGE_REVIEW',
                 payload: {
@@ -46,6 +46,9 @@ class ReviewField extends React.Component {
                     rating: this.state.rating
                 }
             })
+            this.props.changeToReviewed();
+            this.props.toggle();
+
         }
     }
 

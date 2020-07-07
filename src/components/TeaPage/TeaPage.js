@@ -128,12 +128,19 @@ class Browse extends Component {
         return false
     }
 
+    changeToReviewed = () => {
+        this.setState({
+            reviewed: true
+        })
+    }
+
     async componentDidMount(){
         await this.getReviews();
         this.checkIfOwned();
         this.checkIfFavorited();
         this.checkIfReviewed();
     }
+
     reviewToggleOn = (event) => {
         if (this.state.reviewToggled === false) {
             this.setState({
@@ -187,8 +194,14 @@ class Browse extends Component {
                     return <div key={review.id} className="usersReview">
                         {this.state.reviewToggled === true ?
                             <>
-                                <ReviewField review={review.review} rating={review.rating} tea_id={this.props.location.tea.id}/>
-                                <button onClick={this.reviewToggleOff}>Done Editing</button>
+                                <ReviewField
+                                review={review.review}
+                                rating={review.rating}
+                                tea_id={this.props.location.tea.id}
+                                toggle={this.reviewToggleOff}
+                                changeToReviewed={this.changeToReviewed}
+                                />
+                                {/* <button onClick={this.reviewToggleOff}>Done Editing</button> */}
                             </>
                         :
                             <>
@@ -206,8 +219,14 @@ class Browse extends Component {
                 <>
                 {this.state.reviewToggled === true ?
                 <>
-                    <ReviewField review={tea.review} rating={tea.rating} tea_id={this.props.location.tea.id}/>
-                    <button onClick={this.reviewToggleOff}>Done Editing</button>
+                    <ReviewField
+                        review={tea.review}
+                        rating={tea.rating}
+                        tea_id={this.props.location.tea.id}
+                        toggle={this.reviewToggleOff}
+                        changeToReviewed={this.changeToReviewed}
+                        />
+                    {/* <button onClick={this.reviewToggleOff}>Done Editing</button> */}
                 </>
                 :
                 <button onClick={this.reviewToggleOn} value={tea.tea_id}>Add Your Own!</button>
