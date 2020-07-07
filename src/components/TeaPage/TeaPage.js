@@ -83,8 +83,8 @@ class Browse extends Component {
 
     checkIfOwned = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
-            const element = this.props.usersTeas[index];
-            if(this.props.location.tea.id == element.id && element.owned === true){
+            const tea = this.props.usersTeas[index];
+            if(this.props.location.tea.id == tea.tea_id && tea.owned === true){
                 this.setState({
                     owned: true
                 })
@@ -98,8 +98,8 @@ class Browse extends Component {
     }
     checkIfFavorited = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
-            const element = this.props.usersTeas[index];
-            if(this.props.location.tea.id == element.id && element.favorited === true){
+            const tea = this.props.usersTeas[index];
+            if(this.props.location.tea.id == tea.tea_id && tea.favorited === true){
                 this.setState({
                     favorited: true
                 })
@@ -113,9 +113,9 @@ class Browse extends Component {
     }
     checkIfReviewed = () => {
         for (let index = 0; index < this.props.usersTeas.length; index++) {
-            const element = this.props.usersTeas[index];
-            console.log('review,' , element.review)
-            if (this.props.location.tea.id == element.id && element.review !== null) {
+            const tea = this.props.usersTeas[index];
+            console.log('review,' , tea.tea_id , this.props.location.tea.id) 
+            if (this.props.location.tea.id == tea.tea_id && tea.review !== null) {
                 this.setState({
                     reviewed: true
                 })
