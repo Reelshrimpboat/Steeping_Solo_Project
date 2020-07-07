@@ -10,7 +10,6 @@ class Stars extends Component {
         widgetRatedColors = "gold"
         widgetDimensions = "24px"
         widgetSpacings = "0px"
-        gradientPathName='/app/'
       >
         <Ratings.Widget />
         <Ratings.Widget />

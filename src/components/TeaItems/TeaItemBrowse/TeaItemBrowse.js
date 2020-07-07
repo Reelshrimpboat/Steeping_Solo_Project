@@ -16,7 +16,7 @@ class TeaItemFavorite extends Component {
                     <img src={tea.picture} alt={imageDescription} width="300"></img>
                     <p>{tea.description}</p>
                     {this.props.rating &&
-                    <><h4>Rating:</h4> <RatingsStars number={parseInt(this.props.rating)} /></>
+                    <><h4>Rating:</h4> <RatingsStars number={parseFloat(this.props.rating)} /></>
                     }
                 </div>
         );

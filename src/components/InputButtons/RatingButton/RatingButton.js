@@ -29,7 +29,6 @@ class RatingButton extends React.Component {
                 name="star"
                 value={numb} 
                 onChange={this.changeRating} 
-                // defaultChecked={numb <= this.props.rating}
                 />
                 )}
             </form>
