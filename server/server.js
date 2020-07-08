@@ -5,6 +5,7 @@ require('dotenv').config();
 const app = express();
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
+const amazonPriceCheck = require('./modules/amazon-price-check');
 
 const passport = require('./strategies/user.strategy');
 
@@ -41,3 +42,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+amazonPriceCheck('https://www.amazon.com/dp/B000E65OF6/');
+amazonPriceCheck('https://www.amazon.com/dp/B000L8CB76/');

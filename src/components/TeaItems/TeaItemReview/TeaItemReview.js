@@ -41,7 +41,7 @@ class TeaReview extends React.Component {
                 <h4>{tea.tea_name}</h4>
                     {this.state.reviewToggled === true ?
                         <>
-                            {this.state.reviewTeaId == tea.tea_id &&
+                            {/* {this.state.reviewTeaId == tea.tea_id && */}
                                 <>
                                     <ReviewField
                                     review={tea.review}
@@ -52,7 +52,7 @@ class TeaReview extends React.Component {
                                     />
                                     <button onClick={this.reviewToggleOff}>Cancel</button>
                                 </>
-                            }
+                            {/* } */}
                         </>
                     :
                         <>
