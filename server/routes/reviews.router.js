@@ -43,4 +43,25 @@ if (req.isAuthenticated(queryText)) {
     }
 });//END POST for reviews
 
+//PUT for reviews
+router.put('/:id', (req, res) => {
+    const queryText = `UPDATE "user_teas"
+                SET "review" = null
+                WHERE "user_id" = $1 AND "tea_id" = $2;`
+                
+    console.log('post request, user id:', req.user.id, 'tea_id:', req.params.id, 'remove review')
+    if (req.isAuthenticated(queryText)) {
+        pool.query(queryText, [req.user.id, req.params.id])
+        .then((results) => {
+            res.send(results);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    }
+    else{
+        res.sendStatus(403);
+    }
+});//END PUT for reviews
+
 module.exports = router;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Ratings from 'react-ratings-declarative';
 import './ReviewField.css'
 
 class ReviewField extends React.Component {
@@ -25,16 +26,18 @@ class ReviewField extends React.Component {
         })
     }
 
-    changeRating = (event) => {
+    changeRating = (newRating) => {
         this.setState({
-            rating: event.target.value
+            rating: newRating
         })
     }
 
-    addButton = (event) => {
+    saveButton = (event) => {
 
-        if(this.state.review !== '' & this.state.rating !== 0){
-            console.log('to dispatch, review:', this.state.review, 'rating:', this.state.rating)
+        if(this.state.review === '' || this.state.rating === 0){
+            alert('Please input to both fields')
+        } else {
+            console.log('to dispatch, review:', this.state.review, 'rating:', this.state.rating, 'id:', this.props.tea_id)
             this.props.dispatch({
                 type: 'CHANGE_REVIEW',
                 payload: {
@@ -43,9 +46,28 @@ class ReviewField extends React.Component {
                     rating: this.state.rating
                 }
             })
-        } else {
-            alert('Please input to both fields')
+            this.props.changeToReviewed();
+            this.props.toggle();
+
         }
+    }
+
+    deleteReview = (event) => {
+        if (window.confirm('Are you sure you wish to delete this item?')) {
+            this.props.dispatch({
+                    type: 'REMOVE_REVIEW',
+                    payload: {
+                        id: this.props.tea_id
+                    }
+                }
+            )
+            this.props.changeToReviewed();
+            this.props.toggle();
+        }
+        else{
+            console.log('didnt delete that review');
+        }
+
     }
 
     render() {
@@ -57,21 +79,25 @@ class ReviewField extends React.Component {
                 </form>
                 </label>
                 <label htmlFor="5-Star Rating">
-                <form id="starForm">
-                {this.state.starNumber.map((numb) => 
-                    <input
-                    key={numb} 
-                    type="radio"
-                    name="star"
-                    value={numb} 
-                    onChange={this.changeRating} 
-                    // defaultChecked={numb <= this.props.rating}
-                    />
-                )}
-                </form>
+                <Ratings
+                    rating={this.state.rating}
+                    widgetRatedColors = "gold"
+                    widgetDimensions = "24px"
+                    widgetSpacings = "0px"
+                    changeRating={this.changeRating}
+                >
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                </Ratings>
                 </label>
                 <label htmlFor="SaveButton">
-                <button onClick={this.addButton}> Save Review</button>
+                <button onClick={this.saveButton}>Save Review</button>
+                </label>
+                <label htmlFor="SaveButton">
+                <button onClick={this.deleteReview}>Delete Review</button>
                 </label>
 
             </>

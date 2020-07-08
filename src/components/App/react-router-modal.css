@@ -6,7 +6,7 @@
 /* container that contains all modals and backdrops */
 .react-router-modal__container {
     position: fixed;
-    z-index: 1000
+    z-index: 1000;
 }
 
 /* wrapper that contains backdrop and modal */
@@ -30,7 +30,10 @@
 
 /* modal element for the modal component */
 .react-router-modal__modal {
+    overflow: scroll;
     position: fixed;
+    max-height: 80%;
+    padding: 20px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

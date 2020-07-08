@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import RatingButton from '../../InputButtons/RatingButton/RatingButton'
 
 class TeaItemOwned extends React.Component {
 
@@ -33,15 +34,16 @@ class TeaItemOwned extends React.Component {
     render() {
         let tea = this.props.tea
         return(
-            <li>{tea.tea_name}
-
+            <div className="ownedTea">{tea.tea_name}
+            <RatingButton tea_id={this.props.tea.tea_id} rating={this.props.tea.rating}/>
+            <br />
             <button onClick={this.removeTea}>Remove From Owned</button>
         
             {!tea.favorited &&
             <button onClick={this.favoriteTea}>Favorite This Tea</button>
             }
             <button onClick={this.steepTea}>Steep This Tea</button>
-            </li>
+            </div>
         );
     }
 }

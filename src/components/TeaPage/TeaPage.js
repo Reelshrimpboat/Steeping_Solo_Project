@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Review from '../ReviewItem/ReviewItem'
 import ReviewField from '../InputButtons/ReviewField/ReviewField'
-import RatingButton from '../InputButtons/RatingButton/RatingButton'
+import RatingStars from '../RatingStars/RatingStars'
 
 
 class Browse extends Component {
@@ -128,12 +128,19 @@ class Browse extends Component {
         return false
     }
 
+    changeToReviewed = () => {
+        this.setState({
+            reviewed: true
+        })
+    }
+
     async componentDidMount(){
         await this.getReviews();
         this.checkIfOwned();
         this.checkIfFavorited();
         this.checkIfReviewed();
     }
+
     reviewToggleOn = (event) => {
         if (this.state.reviewToggled === false) {
             this.setState({
@@ -166,7 +173,10 @@ class Browse extends Component {
             {this.props.rating &&
             <p>Rating: {this.props.rating.rating}</p>
             }
-            <RatingButton tea_id={this.props.location.tea.id} rating={this.props.location.tea.rating}/>
+            {this.props.rating &&
+            <RatingStars tea_id={this.props.location.tea.id} rating={parseFloat(this.props.location.tea.rating)}/>
+            }      
+            <br />
             {this.state.owned ?
             <button onClick={this.removeOwnedTea}>Remove from Owned</button>
             :
@@ -184,8 +194,14 @@ class Browse extends Component {
                     return <div key={review.id} className="usersReview">
                         {this.state.reviewToggled === true ?
                             <>
-                                <ReviewField review={review.review} rating={review.rating} tea_id={tea.tea_id}/>
-                                <button onClick={this.reviewToggleOff}>Done Editing</button>
+                                <ReviewField
+                                review={review.review}
+                                rating={review.rating}
+                                tea_id={this.props.location.tea.id}
+                                toggle={this.reviewToggleOff}
+                                changeToReviewed={this.changeToReviewed}
+                                />
+                                <button onClick={this.reviewToggleOff}>Cancel</button>
                             </>
                         :
                             <>
@@ -203,8 +219,14 @@ class Browse extends Component {
                 <>
                 {this.state.reviewToggled === true ?
                 <>
-                    <ReviewField review={tea.review} rating={tea.rating} />
-                    <button onClick={this.reviewToggleOff}>Done Editing</button>
+                    <ReviewField
+                        review={tea.review}
+                        rating={tea.rating}
+                        tea_id={this.props.location.tea.id}
+                        toggle={this.reviewToggleOff}
+                        changeToReviewed={this.changeToReviewed}
+                        />
+                    {/* <button onClick={this.reviewToggleOff}>Done Editing</button> */}
                 </>
                 :
                 <button onClick={this.reviewToggleOn} value={tea.tea_id}>Add Your Own!</button>
