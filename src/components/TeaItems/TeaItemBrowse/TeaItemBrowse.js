@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RatingsStars from '../../RatingStars/RatingStars'
 
-class TeaItemFavorite extends Component {
-    selectTea = (event) => {
-        this.props.history.push(`/tea/${event.target.id}`);
-    }
+class TeaItemBrowse extends Component {
+    // selectTea = (event) => {
+    //     this.props.history.push(`/tea/${event.target.id}`);
+    // }
 
     render() {
         let tea = this.props.tea;
@@ -24,4 +24,4 @@ class TeaItemFavorite extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect()(TeaItemFavorite);
+export default connect()(TeaItemBrowse);
