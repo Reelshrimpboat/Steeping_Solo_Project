@@ -55,3 +55,27 @@ input {
     padding: 10px;
     margin: 10px;
 }
+.wrapper{
+    margin: 0 auto;
+    width: 98%;
+}
+
+.centerTimerSearch{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 60%;
+    max-width: 600px;
+}
+
+.pickOrSelected{
+    
+}
+
+h1{
+    font-size: 2.8em;
+}
+h2{
+    font-size: larger;
+}

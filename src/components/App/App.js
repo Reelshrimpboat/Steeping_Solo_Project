@@ -41,6 +41,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
+          <section className="wrapper">
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -106,6 +107,7 @@ class App extends Component {
             parentPath='/browse'
             component={TeaPage}
           />
+          </section>
           <ModalContainer />
           <Footer />
         </div>
