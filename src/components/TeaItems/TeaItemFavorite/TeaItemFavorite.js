@@ -38,7 +38,11 @@ class TeaItemFavorite extends React.Component {
             <h4>{tea.tea_name}</h4>
             <img src={tea.picture} alt={tea.tea_name} width="300"></img>
             <br />
+            {this.props.tea.rating ?
             <RatingButton tea_id={this.props.tea.tea_id} rating={this.props.tea.rating}/>
+            :
+            <RatingButton tea_id={this.props.tea.tea_id} rating={0}/>
+            }
             <br />
             <button onClick={this.removeTea}>Remove From Favorited</button>
             {!tea.owned &&

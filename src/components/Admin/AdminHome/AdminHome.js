@@ -6,12 +6,13 @@ class AdminHome extends Component {
  render() {
    return (
      <section>
-            <Link className="nav-link" to="/admin/add">
-                Add A Tea to the Database
+            <Link to="/admin/add">
+                <button>Add A Tea to the Database</button>
             </Link>
-            <Link className="nav-link" to="/admin/list">
-                Review or Edit Tea Database
+            <Link to="/admin/list">
+                <button>Review or Edit Tea Database</button>
             </Link>
+
       </section>
    )
  }

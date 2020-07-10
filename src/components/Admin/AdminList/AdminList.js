@@ -27,11 +27,11 @@ class AdminList extends Component {
  render() {
    return (
     <section>
-        <Link className="nav-link" to="/admin/Home">
-            Back To Tools
+        <Link to="/admin/Home">
+            <button>Back To Tools</button>
         </Link>
-        <Link className="nav-link" to="/admin/add">
-            Add A Tea to the Database
+        <Link to="/admin/add">
+            <button>Add A Tea to the Database</button>
         </Link>
         <table>
             <thead>
