@@ -106,6 +106,13 @@ class App extends Component {
             path={`/browse/tea`}
             parentPath='/browse'
             component={TeaPage}
+            className='react-router-modal__modal'
+            inClassName = 'modal-in'
+            outClassName = 'modal-out'
+            backdropClassName = 'react-router-modal__backdrop'
+            backdropInClassName = 'backdrop-in'
+            backdropOutClassName = 'backdrop-out'
+            outDelay={500}
           />
           </section>
           <ModalContainer />
