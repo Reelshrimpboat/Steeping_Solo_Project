@@ -1,15 +1,18 @@
+@import '../../variables.scss';
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: $font-stack;
     margin: 0px;
+    background-color: $backgroundColor;
 }
 
 .alert {
-    background-color: #ff4545;
+    background-color: $primaryAccentColor;
     margin: 50px;
 }
 
 .loginForm {
-    background-color: #dbd5d5;
+    text-align: center;
     width: 30%;
     height: 250px;
     margin: 20px auto;
@@ -23,9 +26,8 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #00acb0;
   border-radius: 4px;
-  color: #f8f8f8;
+  color: $primaryColor;
   min-height: 50px;
   min-width: 100px;
   outline:0;
@@ -33,7 +35,7 @@ input {
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
+  background-color: $tertiaryColor;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -51,10 +53,11 @@ input {
 .browseBox{
     width: 560px;
     display: inline-block;
-    background-color: azure;
+    background-color: $tertiaryColor;
     padding: 10px;
     margin: 10px;
 }
+
 .wrapper{
     margin: 0 auto;
     width: 98%;
@@ -77,5 +80,5 @@ h1{
     font-size: 2.8em;
 }
 h2{
-    font-size: larger;
+    font-size: 2em;
 }

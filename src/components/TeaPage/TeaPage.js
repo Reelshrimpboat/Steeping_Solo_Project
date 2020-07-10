@@ -14,7 +14,7 @@ class Browse extends Component {
         reviewed: false,
         reviewToggled: false,
     }
-
+    
     addOwnedTea = () => {
             this.props.dispatch({
                 type: 'CHANGE_OWNED_STATUS',
@@ -66,13 +66,13 @@ class Browse extends Component {
     }
 
     //gets reviews
-    getReviews = () => {
+    getReviews = (numb) => {
         //GET request
         this.props.dispatch({
             type: 'FETCH_REVIEWS',
             payload: this.props.location.tea.id
         })
-        // let reviewsGotten = this.props.reviews.map((review) => {return review})
+        // let reviewsGotten = this.props.reviews.slice(0, numb).map((review) => {return review})
         // console.log(reviewsGotten);
         // this.setState({
         //     reviews: reviewsGotten,

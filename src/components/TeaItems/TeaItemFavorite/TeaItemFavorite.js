@@ -34,12 +34,18 @@ class TeaItemFavorite extends React.Component {
     render() {
         let tea = this.props.tea
         return(
-            <div className="favoriteTea">{tea.tea_name}
+            <div className="favoriteTea">
+            <h4>{tea.tea_name}</h4>
+            <img src={tea.picture} alt={tea.tea_name} width="300"></img>
+            <br />
             <RatingButton tea_id={this.props.tea.tea_id} rating={this.props.tea.rating}/>
             <br />
             <button onClick={this.removeTea}>Remove From Favorited</button>
             {!tea.owned &&
+            <>
+            <br />
             <button onClick={this.ownTea}>Add to Owned</button>
+            </>
             }
             </div>
         );

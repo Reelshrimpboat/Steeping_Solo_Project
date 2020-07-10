@@ -14,9 +14,12 @@ class Home extends Component {
   }
 
   setTea = (event) => {
+
+    let result = this.props.teas.filter((tea) => tea.id == event.target.id)
+
     this.props.dispatch({
       type: 'SET_TIMED_TEA',
-      payload: this.props.tea
+      payload: result[0]
     })
   }
 
@@ -47,8 +50,10 @@ class Home extends Component {
                 {this.props.usersTeas &&
                     this.props.usersTeas.map((tea) => {
                     if(tea.owned === true){
-                        return <div key={tea.id} onClick={this.setTea} value={tea.id}>
-                            <p>{tea.name}</p>
+                        return <div key={tea.id}>
+                          {console.log('tea:', tea)}
+                            <p>{tea.tea_name}</p>
+                            <button onClick={this.setTea} id={tea.tea_id}>Steep</button>
                             </div>
                     }
                     else{

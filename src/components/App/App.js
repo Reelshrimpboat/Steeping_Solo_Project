@@ -27,7 +27,7 @@ import AdminList from '../Admin/AdminList/AdminList'
 import AdminEdit from '../Admin/AdminEdit/AdminEdit'
 import TeaPage from '../TeaPage/TeaPage'
 
-import './App.css';
+import './App.scss';
 import './react-router-modal.css';
 
 class App extends Component {

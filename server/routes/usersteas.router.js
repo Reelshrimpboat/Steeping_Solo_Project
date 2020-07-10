@@ -6,7 +6,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 //GET Route for users teas
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-    const queryText = `SELECT "user_teas"."id" AS "id", "teas"."name" AS "tea_name", "username", "tea_id", "rating", "favorited", "review", "owned" FROM "user"
+    const queryText = `SELECT "user_teas"."id" AS "id", "teas"."name" AS "tea_name", "username", "tea_id", "rating", "favorited", "review", "owned", "teas"."max_time", "teas"."min_time", "teas"."bitters", "teas"."temp_F", "teas"."picture"
+                        FROM "user"
                         FULL JOIN "user_teas" ON "user"."id" = "user_teas"."user_id"
                         FULL JOIN "teas" ON "user_teas"."tea_id" = "teas"."id"
                         WHERE "user"."id" = $1

@@ -2,9 +2,10 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthorized } = require('../modules/authorization-middleware');
 
 //GET Review Route
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "user_teas"."id", "tea_id", "rating", "review", "username", "user_id" FROM "user_teas"
                 JOIN "user" ON "user_teas"."user_id" = "user"."id"
                 WHERE "tea_id" = $1 AND "review" IS NOT NULL`;
@@ -21,7 +22,7 @@ router.get('/:id', (req, res) => {
 }); //END GET Review Route
 
 //POST for reviews
-router.post('/:id', (req, res) => {
+router.post('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `INSERT INTO "user_teas"
                 ("user_id", "tea_id", "review", "rating")
                 SELECT $1, $2,$3, $4
@@ -29,18 +30,15 @@ router.post('/:id', (req, res) => {
                 DO UPDATE SET "review"=$5, "rating"=$6;`
                 
     console.log('post request, user id:', req.user.id, 'tea_id:', req.params.id, 'review:', req.body.review)
-if (req.isAuthenticated(queryText)) {
-        pool.query(queryText, [req.user.id, req.params.id, req.body.review, req.body.rating, req.body.review, req.body.rating])
-        .then((results) => {
-            res.send(results);
-        }).catch((error) => {
-            console.log(error);
-            res.sendStatus(500);
-        })
-    }
-    else{
-        res.sendStatus(403);
-    }
+    pool.query(queryText, [req.user.id, req.params.id, req.body.review, req.body.rating, req.body.review, req.body.rating])
+    .then((results) => {
+        res.send(results);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+
+
 });//END POST for reviews
 
 //PUT for reviews
