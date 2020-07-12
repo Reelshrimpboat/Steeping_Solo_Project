@@ -46,7 +46,7 @@ class TeaItemOwned extends React.Component {
             {!tea.favorited &&
             <button onClick={this.favoriteTea}>Favorite This Tea</button>
             }
-            <button onClick={this.steepTea}>Steep This Tea</button>
+            {/* <button onClick={this.steepTea}>Steep This Tea</button> */}
             </div>
         );
     }

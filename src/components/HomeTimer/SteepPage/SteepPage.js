@@ -10,13 +10,13 @@ class SteepPage extends React.Component {
 
     render() {
         return(
-            <>
+            <section className="center">
             {this.props.selectedTea.id ?
             <div className="centerTimerSearch">
                 {console.log('selected Tea:', this.props.selectedTea)}
             <div>
-                <h2>{this.props.selectedTea.name}</h2>
-                <h3>{this.props.selectedTea.temp_F}</h3>
+                <h1>{this.props.selectedTea.name}</h1>
+                <h2>{this.props.selectedTea.temp_F}&deg;F</h2>
             </div>
             <div>
                 <Timer min_time={this.props.selectedTea.min_time} max_time={this.props.selectedTea.max_time}/>
@@ -26,7 +26,7 @@ class SteepPage extends React.Component {
             :
             this.backClick()
             }
-        </>
+        </section>
         );
     }
 }

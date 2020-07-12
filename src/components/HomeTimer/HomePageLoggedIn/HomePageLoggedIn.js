@@ -32,12 +32,12 @@ class Home extends Component {
 
   render() {
    return (
-    <section>
+    <section className="center">
         {this.props.selectedTea.min_time ?
         <div className="pickOrSelected">
             <h2>{this.props.selectedTea.name}</h2>
             <h3>Steeping Time: {this.props.selectedTea.min_time/60} - {this.props.selectedTea.max_time/60}</h3>
-            <h3>Steeping Temp: {this.props.selectedTea.temp_F}</h3>
+            <h3>Steeping Temp: {this.props.selectedTea.temp_F}&deg;F</h3>
             <button onClick={this.steepClick}>Steep!</button>
         </div>
         :
@@ -52,8 +52,9 @@ class Home extends Component {
                     if(tea.owned === true){
                         return <div key={tea.id}>
                           {console.log('tea:', tea)}
-                            <p>{tea.tea_name}</p>
+                            <p>{tea.tea_name}
                             <button onClick={this.setTea} id={tea.tea_id}>Steep</button>
+                            </p>
                             </div>
                     }
                     else{
