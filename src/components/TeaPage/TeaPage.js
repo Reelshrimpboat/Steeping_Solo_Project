@@ -172,7 +172,7 @@ class Browse extends Component {
             {this.props.location.tea ? 
             <>
             <h2>{this.props.location.tea.name}</h2>
-            <img src={this.props.location.tea.picture} alt={this.props.location.tea.name} width="300"></img>
+            <img src={this.props.location.tea.picture} alt={this.props.location.tea.name} className="teaImage"></img>
             <p>Average Rating: {this.props.location.tea.rating}</p>
             <p>{this.props.location.tea.description}</p>
             {this.props.rating &&

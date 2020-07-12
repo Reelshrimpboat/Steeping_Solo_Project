@@ -13,7 +13,7 @@ class TeaItemBrowse extends Component {
         return(
                 <div className="browseBox">
                     <h2>{tea.name}</h2>
-                    <img src={tea.picture} alt={imageDescription} width="300"></img>
+                    <img src={tea.picture} alt={imageDescription} className="browseImage"></img>
                     <p>{tea.description}</p>
                     {this.props.rating &&
                     <><h4>Rating:</h4> <RatingsStars rating={parseFloat(this.props.rating)} /></>

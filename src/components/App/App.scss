@@ -4,20 +4,22 @@ body {
     font-family: $font-stack;
     margin: 0px;
     background-color: $backgroundColor;
+    margin-bottom: 50px;
 }
 
 .alert {
-    background-color: $primaryAccentColor;
-    margin: 50px;
+    margin: 10px;
+    text-align: center;
 }
 
 .loginForm {
+    display: block;
     text-align: center;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
+    width: 80%;
+    max-width: 300px;
+    padding: 6px 10px;
+    margin: 0px auto;
+    border-radius: 6px;
 }
 
 input {
@@ -25,38 +27,22 @@ input {
     margin-bottom: 10px;
 }
 
-.log-in, .log-out, .register {
-  border-radius: 4px;
-  color: $primaryColor;
-  min-height: 50px;
-  min-width: 100px;
-  outline:0;
-  cursor: pointer;
-}
-
-.log-in:hover, .log-out:hover, .register:hover {
-  background-color: $tertiaryColor;
-}
-
-/* This line makes the "Register" and "Login" buttons look like links */
-.link-button {
-    background:none;
-    color:inherit;
-    border:none;
-    padding:0;
-    font: inherit;
-    outline:0;
-    border-bottom:1px solid #444; 
-    cursor: pointer;
-}
-
 .browseBox{
-    width: 560px;
+    max-width: 500px;
+    width: 90%;
     display: inline-block;
     background-color: $tertiaryColor;
     padding: 10px;
     margin: 10px;
     vertical-align: top;
+}
+
+.browseImage{
+    width: 100%;
+}
+
+.teaImage{
+   width: 100%;
 }
 
 .wrapper{
@@ -85,10 +71,10 @@ button:hover{
 }
 
 h1{
-    font-size: 2.8em;
+    font-size: 5vh;
     color: $primaryColor;
 }
 h2{
-    font-size: 2em;
+    font-size: 3vh;
     color: $primaryColor;
 }
