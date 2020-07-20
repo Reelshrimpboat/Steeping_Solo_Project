@@ -1,5 +1,9 @@
 td{
+    padding: 10px;
     max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .pictureColumn{
     width: 50px;

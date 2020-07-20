@@ -96,9 +96,11 @@ class ReviewField extends React.Component {
                 <label htmlFor="SaveButton">
                 <button onClick={this.saveButton}>Save Review</button>
                 </label>
-                <label htmlFor="SaveButton">
-                <button onClick={this.deleteReview}>Delete Review</button>
-                </label>
+                {this.props.review && 
+                    <label htmlFor="DeleteButton">
+                        <button onClick={this.deleteReview}>Delete Review</button>
+                    </label>
+                }
 
             </>
         );

@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+import './Nav.scss';
 
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Steeping Time</h2>
+      <h2 className="nav-title">Steeping</h2>
     </Link>
     <div className="nav-right">
 
@@ -36,10 +36,6 @@ const Nav = (props) => (
           </Link>
         </>
         }
-      {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
-      </Link>
     </div>
   </div>
 );

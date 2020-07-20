@@ -101,7 +101,13 @@ class Timer extends React.Component {
   render() {
     return(
       <div>
-        m: {this.state.time.m} s: {this.state.time.s}
+        <h1 className="timer">
+        {this.state.time.m}:{this.state.time.s < 10 ?
+        <>0{this.state.time.s}</>
+        :
+        <>{this.state.time.s}</>
+        }
+        </h1>
         {!this.state.countingDown && !this.state.clockStopped &&
           <button onClick={this.startTimer}>Start</button>
         }

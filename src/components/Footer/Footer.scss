@@ -1,0 +1,19 @@
+@import '../../variables.scss';
+
+footer {
+    // position: fixed;
+    background-color: $backgroundColor;
+    padding: 6px 0px;
+    // height: 20px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+
+.footerText{
+    margin: 0px;
+    padding: 0px;
+    font-size: small;
+    text-align: center;
+}

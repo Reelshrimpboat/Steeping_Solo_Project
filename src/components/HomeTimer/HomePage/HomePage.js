@@ -18,14 +18,17 @@ class Home extends Component {
 
  render() {
    return (
-    <section>
-      <h1>Pick a tea, any tea!</h1>
-        {this.props.selectedTea.min_time &&
-        <div>
+    <section className="center">
+      {this.props.selectedTea.min_time ?
+        <div className="pickOrSelected">
             <h2>{this.props.selectedTea.name}</h2>
             <h3>Steeping Time: {this.props.selectedTea.min_time/60} - {this.props.selectedTea.max_time/60}</h3>
-            <h3>Steeping Temp: {this.props.selectedTea.temp_F}</h3>
+            <h3>Steeping Temp: {this.props.selectedTea.temp_F}&deg;F</h3>
             <button onClick={this.steepClick}>Steep!</button>
+        </div>
+        :
+        <div className="pickOrSelected">
+        <h1>Pick a tea, any tea!</h1>
         </div>
         }
       <Search />

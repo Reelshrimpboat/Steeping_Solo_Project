@@ -78,12 +78,13 @@ class AdminEdit extends Component {
       <section>
         {this.props.teas[1] && this.state.teaLoaded === false &&
         this.setTea()}
-          <Link className="nav-link" to="/admin/Home">
-              Back To Tools
+          <Link to="/admin/Home">
+              <button>Back To Tools</button>
           </Link>
-          <Link className="nav-link" to="/admin/list">
-              Review/Edit Tea Database
+          <Link to="/admin/list">
+              <button>Review/Edit Tea Database</button>
           </Link>
+          <br />
           <label>Tea to Add:</label>
           <form>
             <label>Name</label>

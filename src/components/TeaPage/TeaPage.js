@@ -14,7 +14,7 @@ class Browse extends Component {
         reviewed: false,
         reviewToggled: false,
     }
-
+    
     addOwnedTea = () => {
             this.props.dispatch({
                 type: 'CHANGE_OWNED_STATUS',
@@ -66,13 +66,13 @@ class Browse extends Component {
     }
 
     //gets reviews
-    getReviews = () => {
+    getReviews = (numb) => {
         //GET request
         this.props.dispatch({
             type: 'FETCH_REVIEWS',
             payload: this.props.location.tea.id
         })
-        // let reviewsGotten = this.props.reviews.map((review) => {return review})
+        // let reviewsGotten = this.props.reviews.slice(0, numb).map((review) => {return review})
         // console.log(reviewsGotten);
         // this.setState({
         //     reviews: reviewsGotten,
@@ -135,10 +135,12 @@ class Browse extends Component {
     }
 
     async componentDidMount(){
+        if (this.props.location.tea){
         await this.getReviews();
         this.checkIfOwned();
         this.checkIfFavorited();
         this.checkIfReviewed();
+        }
     }
 
     reviewToggleOn = (event) => {
@@ -160,16 +162,19 @@ class Browse extends Component {
         })
     }
 
+    goBack = () => {
+        this.props.history.push(`/browse`);
+    }
 
  render() {
-    let tea = this.props.location.tea
-    let imageDescription = `A cup of ${tea.name}`;
     return(
         <div>
-            <h2>{tea.name}</h2>
-            <img src={tea.picture} alt={imageDescription} width="300"></img>
-            <p>Average Rating: {tea.rating}</p>
-            <p>{tea.description}</p>
+            {this.props.location.tea ? 
+            <>
+            <h2>{this.props.location.tea.name}</h2>
+            <img src={this.props.location.tea.picture} alt={this.props.location.tea.name} className="teaImage"></img>
+            <p>Average Rating: {this.props.location.tea.rating}</p>
+            <p>{this.props.location.tea.description}</p>
             {this.props.rating &&
             <p>Rating: {this.props.rating.rating}</p>
             }
@@ -206,7 +211,7 @@ class Browse extends Component {
                         :
                             <>
                                 <Review key={review.id} review={review}/>
-                                <button onClick={this.reviewToggleOn} value={tea.tea_id}>Edit Your Review</button>
+                                <button onClick={this.reviewToggleOn} value={this.props.location.tea.tea_id}>Edit Your Review</button>
                             </>
                         }
                     </div>
@@ -220,18 +225,22 @@ class Browse extends Component {
                 {this.state.reviewToggled === true ?
                 <>
                     <ReviewField
-                        review={tea.review}
-                        rating={tea.rating}
+                        review={this.props.location.tea.review}
+                        rating={this.props.location.tea.rating}
                         tea_id={this.props.location.tea.id}
                         toggle={this.reviewToggleOff}
                         changeToReviewed={this.changeToReviewed}
                         />
-                    {/* <button onClick={this.reviewToggleOff}>Done Editing</button> */}
+                    <button onClick={this.reviewToggleOff}>Cancel</button>
                 </>
                 :
-                <button onClick={this.reviewToggleOn} value={tea.tea_id}>Add Your Own!</button>
+                <button onClick={this.reviewToggleOn} value={this.props.location.tea.tea_id}>Add Your Own!</button>
                 }
                 </>
+            }
+            </>
+            :
+            this.goBack()
             }
         </div>
     );

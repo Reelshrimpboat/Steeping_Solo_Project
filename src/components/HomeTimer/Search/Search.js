@@ -41,7 +41,7 @@ class Search extends Component {
          ref={input => this.search = input}
          onChange={this.handleInputChange}
        />
-       {this.state.results.map((tea) => 
+       {this.state.results.slice(0, 8).map((tea) => 
        <Suggestions tea={tea} key={tea.id}/>
        )}
      </form>

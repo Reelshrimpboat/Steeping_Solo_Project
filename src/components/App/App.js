@@ -27,7 +27,7 @@ import AdminList from '../Admin/AdminList/AdminList'
 import AdminEdit from '../Admin/AdminEdit/AdminEdit'
 import TeaPage from '../TeaPage/TeaPage'
 
-import './App.css';
+import './App.scss';
 import './react-router-modal.css';
 
 class App extends Component {
@@ -41,6 +41,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
+          <section className="wrapper">
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -105,7 +106,15 @@ class App extends Component {
             path={`/browse/tea`}
             parentPath='/browse'
             component={TeaPage}
+            className='react-router-modal__modal'
+            inClassName = 'modal-in'
+            outClassName = 'modal-out'
+            backdropClassName = 'react-router-modal__backdrop'
+            backdropInClassName = 'backdrop-in'
+            backdropOutClassName = 'backdrop-out'
+            outDelay={500}
           />
+          </section>
           <ModalContainer />
           <Footer />
         </div>

@@ -35,14 +35,18 @@ class TeaItemOwned extends React.Component {
         let tea = this.props.tea
         return(
             <div className="ownedTea">{tea.tea_name}
+            {this.props.tea.rating ?
             <RatingButton tea_id={this.props.tea.tea_id} rating={this.props.tea.rating}/>
+            :
+            <RatingButton tea_id={this.props.tea.tea_id} rating={0}/>
+            }
             <br />
             <button onClick={this.removeTea}>Remove From Owned</button>
         
             {!tea.favorited &&
             <button onClick={this.favoriteTea}>Favorite This Tea</button>
             }
-            <button onClick={this.steepTea}>Steep This Tea</button>
+            {/* <button onClick={this.steepTea}>Steep This Tea</button> */}
             </div>
         );
     }

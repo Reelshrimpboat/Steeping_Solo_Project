@@ -27,11 +27,11 @@ class AdminList extends Component {
  render() {
    return (
     <section>
-        <Link className="nav-link" to="/admin/Home">
-            Back To Tools
+        <Link to="/admin/Home">
+            <button>Back To Tools</button>
         </Link>
-        <Link className="nav-link" to="/admin/add">
-            Add A Tea to the Database
+        <Link to="/admin/add">
+            <button>Add A Tea to the Database</button>
         </Link>
         <table>
             <thead>
@@ -40,8 +40,8 @@ class AdminList extends Component {
                     <th>Brand</th>
                     <th>Kind</th>
                     <th>Temp in Farenheit</th>
-                    <th>Min Steeping Time</th>
-                    <th>Max Steeping Time</th>
+                    <th>Min Time</th>
+                    <th>Max Time</th>
                     <th>Does it Bitter?</th>
                     <th>Description</th>
                     <th>Picture URL</th>
@@ -58,7 +58,11 @@ class AdminList extends Component {
                     <td>{tea.temp_F} &deg;F</td>
                     <td>{tea.min_time/60} Minute(s)</td>
                     <td>{tea.max_time/60} Minute(s)</td>
-                    <td>{tea.bitters}</td>
+                    <td>{tea.bitters=== true ?
+                    <>Yes</>
+                    :
+                    <>No</>
+                    }</td>
                     <td>{tea.description}</td>
                     <td className="pictureColumn">{tea.picture}</td>
                     <td>{tea.google_search_id}</td>
