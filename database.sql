@@ -44,6 +44,10 @@ CREATE TABLE "categories"
     "name" varchar
 );
 
+ALTER TABLE "user_teas"
+    ADD CONSTRAINT user_teas_uq
+    UNIQUE (user_id, tea_id) ;
+
 INSERT INTO "teas"
     ("name", "temp_F", "min_time", "max_time", "bitters", "description")
 VALUES
